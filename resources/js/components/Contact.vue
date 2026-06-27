@@ -29,7 +29,7 @@ const contactForm = reactive<ContactFormeProps>({
   firstName: "",
   lastName: "",
   email: "",
-  subject: "Web Development",
+  subject: "Pengembangan Web",
   message: "",
 });
 
@@ -39,35 +39,34 @@ const handleSubmit = () => {
   const { firstName, lastName, email, subject, message } = contactForm;
   console.log(contactForm);
 
-  const mailToLink = `mailto:leomirandadev@gmail.com?subject=${subject}&body=Hello I am ${firstName} ${lastName}, my Email is ${email}. %0D%0A${message}`;
+  const mailToLink = `mailto:leomirandadev@gmail.com?subject=${subject}&body=Halo, saya ${firstName} ${lastName}, Email saya adalah ${email}. %0D%0A${message}`;
 
   window.location.href = mailToLink;
 };
 </script>
 
 <template>
-  <!-- Added mx-auto, max-w-7xl, and px-4 sm:px-6 to perfectly match Benefits.vue's constraints -->
   <section
     id="contact"
     class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
+    data-aos="fade-up" data-aos-duration="1000"
   >
     <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
         <div class="mb-4">
-          <p class="text-sm font-semibold tracking-wider text-primary uppercase mb-2">Contacts</p>
+          <p class="text-sm font-semibold tracking-wider text-primary uppercase mb-2">Kontak</p>
 
-          <h2 class="text-3xl md:text-4xl font-bold">Connect With Us</h2>
+          <h2 class="text-3xl md:text-4xl font-bold">Hubungi Kami</h2>
         </div>
         <p class="mb-8 text-muted-foreground lg:w-5/6">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-          ipsam sint enim exercitationem ex autem corrupti quas tenetur
+          Silakan hubungi kami untuk mendiskusikan proyek Anda berikutnya atau jika Anda memiliki pertanyaan seputar layanan kami.
         </p>
 
         <div class="flex flex-col gap-4">
           <div>
             <div class="flex gap-2 mb-1">
               <Building2 />
-              <div class="font-bold">Find Us</div>
+              <div class="font-bold">Alamat Kami</div>
             </div>
 
             <div>742 Evergreen Terrace, Springfield, IL 62704</div>
@@ -76,7 +75,7 @@ const handleSubmit = () => {
           <div>
             <div class="flex gap-2 mb-1">
               <Phone />
-              <div class="font-bold">Call Us</div>
+              <div class="font-bold">Telepon</div>
             </div>
 
             <div>+1 (619) 123-4567</div>
@@ -85,7 +84,7 @@ const handleSubmit = () => {
           <div>
             <div class="flex gap-2 mb-1">
               <Mail />
-              <div class="font-bold">Mail Us</div>
+              <div class="font-bold">Email</div>
             </div>
 
             <div>leomirandadev@gmail.com</div>
@@ -94,12 +93,12 @@ const handleSubmit = () => {
           <div>
             <div class="flex gap-2">
               <Clock />
-              <div class="font-bold">Visit Us</div>
+              <div class="font-bold">Jam Kerja</div>
             </div>
 
             <div>
-              <div>Monday - Friday</div>
-              <div>8AM - 4PM</div>
+              <div>Senin - Jumat</div>
+              <div>08.00 - 16.00</div>
             </div>
           </div>
         </div>
@@ -115,7 +114,7 @@ const handleSubmit = () => {
           >
             <div class="flex flex-col md:flex-row gap-8">
               <div class="flex flex-col w-full gap-1.5">
-                <Label for="first-name">First Name</Label>
+                <Label for="first-name">Nama Depan</Label>
                 <Input
                   id="first-name"
                   type="text"
@@ -125,7 +124,7 @@ const handleSubmit = () => {
               </div>
 
               <div class="flex flex-col w-full gap-1.5">
-                <Label for="last-name">Last Name</Label>
+                <Label for="last-name">Nama Belakang</Label>
                 <Input
                   id="last-name"
                   type="text"
@@ -146,24 +145,24 @@ const handleSubmit = () => {
             </div>
 
             <div class="flex flex-col gap-1.5">
-              <Label for="subject">Subject</Label>
+              <Label for="subject">Subjek</Label>
 
               <Select v-model="contactForm.subject">
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a subject" />
+                  <SelectValue placeholder="Pilih subjek" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value="Web Development">
-                      Web Development
+                    <SelectItem value="Pengembangan Web">
+                      Pengembangan Web
                     </SelectItem>
-                    <SelectItem value="Mobile Development">
-                      Mobile Development
+                    <SelectItem value="Pengembangan Aplikasi Mobile">
+                      Pengembangan Aplikasi Mobile
                     </SelectItem>
-                    <SelectItem value="Figma Design"> Figma Design </SelectItem>
-                    <SelectItem value="REST API "> REST API </SelectItem>
-                    <SelectItem value="FullStack Project">
-                      FullStack Project
+                    <SelectItem value="Desain Figma"> Desain Figma </SelectItem>
+                    <SelectItem value="REST API"> REST API </SelectItem>
+                    <SelectItem value="Proyek FullStack">
+                      Proyek FullStack
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
@@ -171,10 +170,10 @@ const handleSubmit = () => {
             </div>
 
             <div class="flex flex-col gap-1.5">
-              <Label for="message">Message</Label>
+              <Label for="message">Pesan</Label>
               <Textarea
                 id="message"
-                placeholder="Your message..."
+                placeholder="Tulis pesan Anda di sini..."
                 rows="5"
                 v-model="contactForm.message"
               />
@@ -185,13 +184,13 @@ const handleSubmit = () => {
               variant="destructive"
             >
               <AlertCircle class="w-4 h-4" />
-              <AlertTitle>Error</AlertTitle>
+              <AlertTitle>Kesalahan</AlertTitle>
               <AlertDescription>
-                There is an error in the form. Please check your input.
+                Terdapat kesalahan pada formulir Anda. Silakan periksa kembali inputan Anda.
               </AlertDescription>
             </Alert>
 
-            <Button class="mt-4">Send message</Button>
+            <Button class="mt-4">Kirim pesan</Button>
           </form>
         </CardContent>
 

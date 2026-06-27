@@ -13,7 +13,7 @@ import { Moon, Sun } from "lucide-vue-next";
     class="w-full justify-start"
   >
     <div
-      v-if="mode == 'light'"
+      v-if="mode === 'light'"
       class="flex gap-2"
     >
       <Moon class="size-5" />
@@ -21,7 +21,7 @@ import { Moon, Sun } from "lucide-vue-next";
     </div>
 
     <div
-      v-else="mode == 'dark'"
+      v-else-if="mode === 'dark'"
       class="flex gap-2"
     >
       <Sun class="size-5" />

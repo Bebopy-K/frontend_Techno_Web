@@ -15,6 +15,7 @@ import DiscordIcon from "@/icons/DiscordIcon.vue";
   <section
     id="community"
     class="relative overflow-hidden py-24 sm:py-32 bg-background isolation-auto w-full"
+    data-aos="fade-up" data-aos-duration="1000"
   >
     <div class="absolute bottom-0 left-0 w-full z-0 h-full overflow-hidden pointer-events-none select-none">
       <div
@@ -34,18 +35,12 @@ import DiscordIcon from "@/icons/DiscordIcon.vue";
           <div class="flex-1 text-center md:text-left space-y-4">
             <CardHeader class="p-0 space-y-2">
               <CardTitle class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
-                Looking for a job?<br class="hidden sm:inline" />
+                Lagi cari kerja?<br class="hidden sm:inline" />
                 <span class="text-transparent bg-gradient-to-r from-primary to-[#D247BF] bg-clip-text">
                   We are HIRING
                 </span>
               </CardTitle>
             </CardHeader>
-
-            <CardContent class="p-0">
-              <p class="text-muted-foreground text-base sm:text-lg max-w-xl leading-relaxed">
-                Bergabunglah bersama talenta digital lainnya di komunitas Discord kami. Temukan peluang karir, kolaborasi proyek, dan perluas jaringan profesional Anda.
-              </p>
-            </CardContent>
           </div>
 
           <div class="flex flex-col items-center justify-center min-w-[240px] gap-6">

@@ -3,7 +3,6 @@ import { ref } from "vue";
 
 import { useColorMode } from "@vueuse/core";
 const mode = useColorMode();
-mode.value = "dark";
 
 import {
   NavigationMenu,
@@ -41,23 +40,23 @@ interface FeatureProps {
 const routeList: RouteProps[] = [
   {
     href: "#products",
-    label: "Products",
+    label: "PRODUK",
   },
   {
     href: "#services",
-    label: "Services",
+    label: "SERVIS",
   },
   {
     href: "#contact",
-    label: "Articles",
+    label: "ARTIKEL",
   },
   {
     href: "#team",
-    label: "Team",
+    label: "TIM",
   },
   {
     href: "#news",
-    label: "Contact",
+    label: "KONTAK",
   },
 ];
 
@@ -94,7 +93,7 @@ const isOpen = ref<boolean>(false);
         <img 
           src="../assets/icon.svg" 
           alt="Logo" 
-          class="size-12 object-contain invert dark:invert-0 transition-all duration-200" 
+          class="size-12 object-contain invert dark:invert-0 light:invert transition-all duration-200" 
         />
       </a>
     </div>

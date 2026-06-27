@@ -17,7 +17,7 @@ interface ArticleProps {
 const featuredArticle: ArticleProps = {
   id: 1,
   title: "Baldur's Gate 3 Community Modathon 2026",
-  excerpt: "Can you believe July is almost here? That means the incredible Baldur's Gate 3 modding community is officially gearing up for the third annual Modathon! Nearly 400 incredible creations have been submitted for the event since it first began, and this year is already shaping up to be the most exciting yet.",
+  excerpt: "Tidak terasa bulan Juli sudah hampir tiba! Ini berarti komunitas modding Baldur's Gate 3 secara resmi bersiap untuk gelaran Modathon tahunan ketiga! Hampir 400 karya luar biasa telah dikirimkan sejak ajang ini dimulai, dan tahun ini tampaknya akan menjadi yang paling menarik.",
   author: "Modsetti",
   category: "Mod News",
   date: "15 JUN 2026",
@@ -29,7 +29,7 @@ const featuredArticle: ArticleProps = {
 const articleList: ArticleProps[] = [
   {
     id: 2,
-    title: "Stardew Valley Modfest - Winners",
+    title: "Stardew Valley Modfest - Pengumuman Pemenang",
     author: "Modsetti",
     date: "04 JUN 2026",
     comments: 31,
@@ -37,7 +37,7 @@ const articleList: ArticleProps[] = [
   },
   {
     id: 3,
-    title: "Monthly Roundup - May 2026",
+    title: "Rangkuman Bulanan - Edisi Mei 2026",
     author: "SlugGirl",
     date: "02 JUN 2026",
     comments: 47,
@@ -45,17 +45,17 @@ const articleList: ArticleProps[] = [
   },
   {
     id: 4,
-    title: "Fallout Collectionathon - Winners",
+    title: "Fallout Collectionathon - Pengumuman Pemenang",
     author: "ModularCocoon",
-    date: "21 MAY 2026",
+    date: "21 MEI 2026",
     comments: 46,
     image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1471&auto=format&fit=crop"
   },
   {
     id: 5,
-    title: "Monthly Roundup - April 2026",
+    title: "Rangkuman Bulanan - Edisi April 2026",
     author: "SlugGirl",
-    date: "06 MAY 2026",
+    date: "06 MEI 2026",
     comments: 57,
     image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1565&auto=format&fit=crop"
   }
@@ -66,99 +66,106 @@ const articleList: ArticleProps[] = [
   <section
     id="news"
     class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
+    data-aos="fade-up" data-aos-duration="1000"
   >
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-12">
+    <!-- Header Section -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-12 border-b border-border/40">
       <div class="space-y-2 text-left">
-        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Updates</p>
+        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Artikel & Berita</p>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-          Latest News
+          Berita Terbaru
         </h2>
       </div>
       <a 
         href="#" 
-        class="inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-200 group/link self-start md:self-end"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors duration-200 group/link self-start sm:self-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md px-1"
       >
-        View all
+        Lihat semua
         <ArrowRight class="size-4 transition-transform duration-200 group-hover/link:translate-x-1" />
       </a>
     </div>
 
+    <!-- Main Content Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
       
-      <article class="lg:col-span-5 group/featured relative">
-        <a :href="`/news/${featuredArticle.id}`" class="absolute inset-0 z-10" aria-hidden="true"></a>
+      <!-- Artikel Utama (Kiri) -->
+      <article class="lg:col-span-5 group/featured relative flex flex-col focus-within:ring-2 focus-within:ring-primary/40 focus-within:ring-offset-2 rounded-2xl transition-all duration-300">
+        <a :href="`/news/${featuredArticle.id}`" class="absolute inset-0 z-10 rounded-2xl" :aria-label="`Baca selengkapnya tentang ${featuredArticle.title}`"></a>
         
-        <Card class="bg-transparent border-0 shadow-none overflow-hidden p-0">
+        <Card class="bg-transparent border-0 shadow-none overflow-hidden p-0 flex flex-col h-full">
+          <!-- Thumbnail Container dengan Efek Zoom -->
           <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-muted border border-border/40">
             <img 
               :src="featuredArticle.image" 
               :alt="featuredArticle.title" 
-              class="w-full h-full object-cover object-center"
+              class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover/featured:scale-105"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent"></div>
           </div>
           
-          <div class="pt-6 space-y-3">
-            <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
-              <span v-if="featuredArticle.category" class="px-2.5 py-0.5 font-semibold bg-primary/10 text-primary rounded-md uppercase tracking-wider text-[10px]">
-                {{ featuredArticle.category }}
-              </span>
-              <span class="text-muted-foreground flex items-center gap-1 font-medium">
-                <User class="size-3.5 text-muted-foreground/70" /> {{ featuredArticle.author }}
-              </span>
+          <!-- Konten Teks -->
+          <div class="pt-6 flex-1 flex flex-col justify-between space-y-3">
+            <div class="space-y-3">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
+                <span v-if="featuredArticle.category" class="px-2.5 py-0.5 font-bold bg-primary/10 text-primary rounded-md uppercase tracking-wider text-[10px]">
+                  {{ featuredArticle.category }}
+                </span>
+                <span class="text-muted-foreground flex items-center gap-1 font-medium">
+                  <User class="size-3.5 text-muted-foreground/70" /> {{ featuredArticle.author }}
+                </span>
+              </div>
+
+              <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight text-foreground group-hover/featured:text-primary transition-colors duration-200 leading-snug">
+                {{ featuredArticle.title }}
+              </h3>
+
+              <p class="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                {{ featuredArticle.excerpt }}
+              </p>
             </div>
 
-            <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight text-foreground group-hover/featured:text-primary group-hover/featured:underline decoration-2 underline-offset-4 transition-colors duration-200 leading-snug">
-              {{ featuredArticle.title }}
-            </h3>
-
-            <p class="text-muted-foreground text-sm leading-relaxed line-clamp-3 pt-1">
-              {{ featuredArticle.excerpt }}
-            </p>
-
-            <div class="flex items-center gap-4 pt-2 text-xs text-muted-foreground font-medium border-t border-border/30">
+            <!-- Meta Footer -->
+            <div class="flex items-center gap-4 pt-4 text-xs text-muted-foreground font-medium border-t border-border/30 mt-2">
               <span class="flex items-center gap-1.5"><Calendar class="size-3.5" /> {{ featuredArticle.date }}</span>
-              <span class="flex items-center gap-1.5"><MessageSquare class="size-3.5" /> {{ featuredArticle.comments }} Comments</span>
+              <span class="flex items-center gap-1.5"><MessageSquare class="size-3.5" /> {{ featuredArticle.comments }} Komentar</span>
             </div>
           </div>
         </Card>
       </article>
 
-      <div class="lg:col-span-7 space-y-1">
+      <!-- Daftar Artikel Samping (Kanan) -->
+      <div class="lg:col-span-7 divide-y divide-border/40 border-t lg:border-t-0 border-border/40">
         <article 
-          v-for="(article, index) in articleList" 
+          v-for="article in articleList" 
           :key="article.id"
-          class="group/list relative rounded-xl transition-all duration-200 p-3"
+          class="group/list relative rounded-xl transition-all duration-300 p-4 -mx-4 hover:bg-muted/40 focus-within:bg-muted/40 flex items-center justify-between gap-4 sm:gap-6"
         >
-          <a :href="`/news/${article.id}`" class="absolute inset-0 z-10" aria-hidden="true"></a>
+          <a :href="`/news/${article.id}`" class="absolute inset-0 z-10 rounded-xl" :aria-label="`Baca selengkapnya tentang ${article.title}`"></a>
 
-          <div 
-            class="flex items-center justify-between gap-6"
-            :class="{ 'pt-4 ': index !== 0 }"
-          >
-            <div class="flex-1 space-y-2">
-              <h4 class="text-base sm:text-lg font-bold text-foreground group-hover/list:text-primary group-hover/list:underline decoration-2 underline-offset-4  duration-200 line-clamp-2 leading-snug">
-                {{ article.title }}
-              </h4>
-              
-              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                <span class="font-semibold text-foreground/70">{{ article.author }}</span>
-                <span class="text-muted-foreground/40">•</span>
-                <span>{{ article.date }}</span>
-                <span class="text-muted-foreground/40">•</span>
-                <span class="flex items-center gap-1"><MessageSquare class="size-3" /> {{ article.comments }}</span>
-              </div>
+          <!-- Teks Artikel -->
+          <div class="flex-1 space-y-2.5 min-w-0">
+            <h4 class="text-base sm:text-lg font-bold text-foreground group-hover/list:text-primary transition-colors duration-200 line-clamp-2 leading-snug pr-2">
+              {{ article.title }}
+            </h4>
+            
+            <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-muted-foreground">
+              <span class="font-semibold text-foreground/80">{{ article.author }}</span>
+              <span class="text-muted-foreground/30">•</span>
+              <span>{{ article.date }}</span>
+              <span class="text-muted-foreground/30">•</span>
+              <span class="flex items-center gap-1"><MessageSquare class="size-3" /> {{ article.comments }}</span>
             </div>
+          </div>
 
-            <div class="relative w-24 h-16 sm:w-32 sm:h-20 flex-shrink-0 overflow-hidden rounded-xl bg-muted border border-border/40">
-              <img 
-                :src="article.image" 
-                :alt="article.title" 
-                class="w-full h-full object-cover object-center"
-                loading="lazy"
-              />
-            </div>
+          <!-- Mini Thumbnail dengan Efek Zoom -->
+          <div class="relative w-20 h-14 sm:w-28 sm:h-20 flex-shrink-0 overflow-hidden rounded-xl bg-muted border border-border/40 shadow-sm">
+            <img 
+              :src="article.image" 
+              :alt="article.title" 
+              class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover/list:scale-105"
+              loading="lazy"
+            />
           </div>
         </article>
       </div>
@@ -166,3 +173,5 @@ const articleList: ArticleProps[] = [
     </div>
   </section>
 </template>
+
+<style lang="less" scoped></style>

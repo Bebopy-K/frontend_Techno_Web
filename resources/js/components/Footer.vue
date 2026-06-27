@@ -2,6 +2,7 @@
   <footer
     id="footer"
     class="container py-24 pb-16 sm:py-32 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6"
+    data-aos="fade-up" data-aos-duration="1000"
   >
     <div class="p-10 bg-muted/50 dark:bg-card border rounded-2xl">
       <div
