@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght=0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* Tailwind v4 mappings to recognize your custom classes */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-ring: hsl(var(--ring));
+  --radius-md: var(--radius);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: 200 33% 96%;          /* Mapped from --background (Soft slate blue) */
+  --foreground: 204 29% 3%;           /* Mapped from --text (Deep abyssal navy) */
+
+  --muted: 203 58% 90%;               /* Lighter variant of --secondary for subtle card/bg tabs */
+  --muted-foreground: 204 29% 35%;    /* Readable subtext based on the deep text color */
+
+  --popover: 200 33% 96%;             /* Matches --background */
+  --popover-foreground: 204 29% 3%;   /* Matches --text */
+
+  --card: 200 33% 96%;                /* Matches --background */
+  --card-foreground: 204 29% 3%;      /* Matches --text */
+
+  --border: 203 58% 85%;              /* Light layout lines generated from --secondary */
+  --input: 203 58% 85%;               /* Matches --border */
+
+  --primary: 202 47% 52%;             /* Mapped from --primary (Ocean blue) */
+  --primary-foreground: 200 33% 96%;  /* High-contrast bright background for text over primary elements */
+
+  --secondary: 203 58% 71%;           /* Mapped from --secondary (Muted sky blue) */
+  --secondary-foreground: 204 29% 3%; /* Matches --text */
+
+  --accent: 203 68% 62%;              /* Mapped from --accent (Vibrant ice blue) */
+  --accent-foreground: 200 33% 96%;   /* Uses high-contrast background color for contrast */
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+
+  --ring: 202 47% 52%;                /* Focus rings match primary core color */
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 204 29% 3%;           /* Inverted: deep navy text becomes the backdrop */
+  --foreground: 200 33% 96%;          /* Inverted: light blue background becomes primary text */
+
+  --muted: 204 25% 12%;               /* Darker overlay variant for cards and structural blocks */
+  --muted-foreground: 203 58% 71%;    /* Sky blue secondary colors serving as crisp secondary text */
+
+  --popover: 204 29% 3%;              /* Matches dark --background */
+  --popover-foreground: 200 33% 96%;  /* Matches dark --text */
+
+  --card: 204 29% 3%;                 /* Matches dark --background */
+  --card-foreground: 200 33% 96%;     /* Matches dark --text */
+
+  --border: 204 20% 16%;              /* Soft, low-contrast border lines for dark theme grid layout */
+  --input: 204 20% 16%;
+
+  --primary: 202 55% 56%;             
+  --primary-foreground: 204 29% 3%;  
+
+  --secondary: 203 40% 30%;           
+  --secondary-foreground: 200 33% 96%;
+
+  --accent: 203 68% 62%;              
+  --accent-foreground: 204 29% 3%;  
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+
+  --ring: 202 55% 56%;                
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-background text-foreground;
+}
