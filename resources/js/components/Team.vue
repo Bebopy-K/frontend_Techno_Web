@@ -34,9 +34,9 @@ const teamList: TeamProps[] = [
     lastName: "",
     positions: ["Direktris Utama"],
     socialNetworks: [
-      { name: "LinkedIn", url: "" },
-      { name: "Github", url: "" },
-      { name: "X", url: "" },
+      // { name: "LinkedIn", url: "" },
+      // { name: "Github", url: "" },
+      // { name: "X", url: "" },
     ],
   },
   {
@@ -45,8 +45,8 @@ const teamList: TeamProps[] = [
     lastName: "S.Kom., M.T.I",
     positions: ["Project Manager"],
     socialNetworks: [
-      { name: "LinkedIn", url: "" },
-      { name: "X", url: "" },
+      // { name: "LinkedIn", url: "" },
+      // { name: "X", url: "" },
     ],
   },
   {
@@ -55,8 +55,8 @@ const teamList: TeamProps[] = [
     lastName: "S.Kom",
     positions: ["Kepala Pengembang Aplikasi Web"],
     socialNetworks: [
-      { name: "LinkedIn", url: "" },
-      { name: "Github", url: "" },
+      // { name: "LinkedIn", url: "" },
+      // { name: "Github", url: "" },
     ],
   },
   {
@@ -65,9 +65,9 @@ const teamList: TeamProps[] = [
     lastName: "S.T, M.T",
     positions: ["Kepala Pengembang Machine Learning"],
     socialNetworks: [
-      { name: "LinkedIn", url: "" },
-      { name: "Github", url: "" },
-      { name: "X", url: "" },
+      // { name: "LinkedIn", url: "" },
+      // { name: "Github", url: "" },
+      // { name: "X", url: "" },
     ],
   },
   {
@@ -76,7 +76,7 @@ const teamList: TeamProps[] = [
     lastName: "S.Kom., M.Kom ",
     positions: ["Kepala Pengembang Aplikasi Mobile"],
     socialNetworks: [
-      { name: "LinkedIn", url: "" },
+      // { name: "LinkedIn", url: "" },
     ],
   },
   {
@@ -85,8 +85,8 @@ const teamList: TeamProps[] = [
     lastName: "S.Kom., M.Kom, CEH, CHFL",
     positions: ["Kepala Pengembang Jaringan"],
     socialNetworks: [
-      { name: "LinkedIn", url: "" },
-      { name: "Github", url: "" },
+      // { name: "LinkedIn", url: "" },
+      // { name: "Github", url: "" },
     ],
   },
   {
@@ -95,9 +95,9 @@ const teamList: TeamProps[] = [
     lastName: "S.T., MM",
     positions: ["Kepala Pengembangan Desktop"],
     socialNetworks: [
-      { name: "LinkedIn", url: "" },
-      { name: "Github", url: "" },
-      { name: "X", url: "" },
+      // { name: "LinkedIn", url: "" },
+      // { name: "Github", url: "" },
+      // { name: "X", url: "" },
     ],
   },
   {
@@ -106,7 +106,7 @@ const teamList: TeamProps[] = [
     lastName: "S.Agr",
     positions: ["Kepala pengembang IoT"],
     socialNetworks: [
-      { name: "X", url: "" },
+      // { name: "X", url: "" },
     ],
   },
   {
@@ -115,7 +115,7 @@ const teamList: TeamProps[] = [
     lastName: "S.T., M.T.",
     positions: ["Kepala pengembang Hardware"],
     socialNetworks: [
-      { name: "X", url: "" },
+      // { name: "X", url: "" },
     ],
   }
 ];

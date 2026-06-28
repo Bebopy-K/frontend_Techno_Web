@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { MessageSquare, Calendar, User, ArrowRight } from "lucide-vue-next";
+import { Link } from '@inertiajs/vue3';
 
 interface ArticleProps {
   id: number;
@@ -68,8 +69,7 @@ const articleList: ArticleProps[] = [
     class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
     data-aos="fade-up" data-aos-duration="1000"
   >
-    <!-- Header Section -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-12 border-b border-border/40">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-12 border-border/40">
       <div class="space-y-2 text-left">
         <p class="text-sm font-semibold tracking-wider text-primary uppercase">Artikel & Berita</p>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
@@ -77,7 +77,7 @@ const articleList: ArticleProps[] = [
         </h2>
       </div>
       <a 
-        href="#" 
+        href="/news" 
         class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors duration-200 group/link self-start sm:self-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md px-1"
       >
         Lihat semua
@@ -85,15 +85,16 @@ const articleList: ArticleProps[] = [
       </a>
     </div>
 
-    <!-- Main Content Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
       
-      <!-- Artikel Utama (Kiri) -->
       <article class="lg:col-span-5 group/featured relative flex flex-col focus-within:ring-2 focus-within:ring-primary/40 focus-within:ring-offset-2 rounded-2xl transition-all duration-300">
-        <a :href="`/news/${featuredArticle.id}`" class="absolute inset-0 z-10 rounded-2xl" :aria-label="`Baca selengkapnya tentang ${featuredArticle.title}`"></a>
+        <Link 
+          :href="`/news/${featuredArticle.id}`" 
+          class="absolute inset-0 z-10 rounded-2xl" 
+          :aria-label="`Baca selengkapnya tentang ${featuredArticle.title}`"
+        ></Link>
         
         <Card class="bg-transparent border-0 shadow-none overflow-hidden p-0 flex flex-col h-full">
-          <!-- Thumbnail Container dengan Efek Zoom -->
           <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-muted border border-border/40">
             <img 
               :src="featuredArticle.image" 
@@ -104,7 +105,6 @@ const articleList: ArticleProps[] = [
             <div class="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent"></div>
           </div>
           
-          <!-- Konten Teks -->
           <div class="pt-6 flex-1 flex flex-col justify-between space-y-3">
             <div class="space-y-3">
               <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
@@ -125,7 +125,6 @@ const articleList: ArticleProps[] = [
               </p>
             </div>
 
-            <!-- Meta Footer -->
             <div class="flex items-center gap-4 pt-4 text-xs text-muted-foreground font-medium border-t border-border/30 mt-2">
               <span class="flex items-center gap-1.5"><Calendar class="size-3.5" /> {{ featuredArticle.date }}</span>
               <span class="flex items-center gap-1.5"><MessageSquare class="size-3.5" /> {{ featuredArticle.comments }} Komentar</span>
@@ -134,16 +133,18 @@ const articleList: ArticleProps[] = [
         </Card>
       </article>
 
-      <!-- Daftar Artikel Samping (Kanan) -->
       <div class="lg:col-span-7 divide-y divide-border/40 border-t lg:border-t-0 border-border/40">
         <article 
           v-for="article in articleList" 
           :key="article.id"
           class="group/list relative rounded-xl transition-all duration-300 p-4 -mx-4 hover:bg-muted/40 focus-within:bg-muted/40 flex items-center justify-between gap-4 sm:gap-6"
         >
-          <a :href="`/news/${article.id}`" class="absolute inset-0 z-10 rounded-xl" :aria-label="`Baca selengkapnya tentang ${article.title}`"></a>
+          <Link 
+            :href="`/news/${article.id}`" 
+            class="absolute inset-0 z-10 rounded-xl" 
+            :aria-label="`Baca selengkapnya tentang ${article.title}`"
+          ></Link>
 
-          <!-- Teks Artikel -->
           <div class="flex-1 space-y-2.5 min-w-0">
             <h4 class="text-base sm:text-lg font-bold text-foreground group-hover/list:text-primary transition-colors duration-200 line-clamp-2 leading-snug pr-2">
               {{ article.title }}
@@ -158,7 +159,6 @@ const articleList: ArticleProps[] = [
             </div>
           </div>
 
-          <!-- Mini Thumbnail dengan Efek Zoom -->
           <div class="relative w-20 h-14 sm:w-28 sm:h-20 flex-shrink-0 overflow-hidden rounded-xl bg-muted border border-border/40 shadow-sm">
             <img 
               :src="article.image" 

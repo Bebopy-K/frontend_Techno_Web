@@ -126,7 +126,7 @@ const iconMap: Record<string, any> = {
 
           <CardFooter class="flex flex-col items-stretch gap-4 pt-6 mt-auto border-t border-border/60 bg-muted/20 dark:bg-muted/5 rounded-b-xl">
             <Button class="w-full font-semibold shadow-sm" variant="default">
-              Lihat Detail Produk
+              Lihat Produk
             </Button>
           </CardFooter>
         </Card>

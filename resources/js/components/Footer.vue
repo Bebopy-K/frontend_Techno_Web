@@ -2,7 +2,6 @@
   <footer
     id="footer"
     class="container py-24 pb-16 sm:py-32 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6"
-    data-aos="fade-up" data-aos-duration="1000"
   >
     <div class="p-10 bg-muted/50 dark:bg-card border rounded-2xl">
       <div
@@ -44,36 +43,6 @@
               class="opacity-60 hover:opacity-100"
             >
               Instagram
-            </a>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <h3 class="font-bold text-lg">Platforms</h3>
-          <div>
-            <a
-              href="#"
-              class="opacity-60 hover:opacity-100"
-            >
-              iOS
-            </a>
-          </div>
-
-          <div>
-            <a
-              href="#"
-              class="opacity-60 hover:opacity-100"
-            >
-              Android
-            </a>
-          </div>
-
-          <div>
-            <a
-              href="#"
-              class="opacity-60 hover:opacity-100"
-            >
-              Web
             </a>
           </div>
         </div>

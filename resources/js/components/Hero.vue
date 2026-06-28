@@ -23,7 +23,7 @@ const shortcutList: ShortcutProps[] = [
     icon: FileText,
     title: "Artikel",
     description: "Baca wawasan terbaru, tutorial, dan tren teknologi di blog kami.",
-    href: "/articles",
+    href: "/news",
   },
   {
     icon: Briefcase,

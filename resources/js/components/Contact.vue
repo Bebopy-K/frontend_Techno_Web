@@ -69,7 +69,7 @@ const handleSubmit = () => {
               <div class="font-bold">Alamat Kami</div>
             </div>
 
-            <div>742 Evergreen Terrace, Springfield, IL 62704</div>
+            <div>Jl. Tadulako No.35</div>
           </div>
 
           <div>
@@ -78,7 +78,7 @@ const handleSubmit = () => {
               <div class="font-bold">Telepon</div>
             </div>
 
-            <div>+1 (619) 123-4567</div>
+            <div>-</div>
           </div>
 
           <div>
@@ -87,18 +87,18 @@ const handleSubmit = () => {
               <div class="font-bold">Email</div>
             </div>
 
-            <div>leomirandadev@gmail.com</div>
+            <div>technocelebesv@gmail.com</div>
           </div>
 
           <div>
-            <div class="flex gap-2">
+            <div class="flex gap-2 mb-1">
               <Clock />
               <div class="font-bold">Jam Kerja</div>
             </div>
 
             <div>
               <div>Senin - Jumat</div>
-              <div>08.00 - 16.00</div>
+              <div>08.00 - 17.00</div>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@ const handleSubmit = () => {
                 <Input
                   id="first-name"
                   type="text"
-                  placeholder="Leopoldo"
+                  placeholder="John"
                   v-model="contactForm.firstName"
                 />
               </div>
@@ -128,7 +128,7 @@ const handleSubmit = () => {
                 <Input
                   id="last-name"
                   type="text"
-                  placeholder="Miranda"
+                  placeholder="Doe"
                   v-model="contactForm.lastName"
                 />
               </div>
@@ -139,7 +139,7 @@ const handleSubmit = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="leomirandadev@gmail.com"
+                placeholder="johndoe@gmail.com"
                 v-model="contactForm.email"
               />
             </div>

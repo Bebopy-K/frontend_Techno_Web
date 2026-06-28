@@ -313,3 +313,159 @@ homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 home.form = homeForm
+
+/**
+* @see routes/web.php:12
+* @route '/products'
+*/
+export const product = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: product.url(options),
+    method: 'get',
+})
+
+product.definition = {
+    methods: ["get","head"],
+    url: '/products',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:12
+* @route '/products'
+*/
+product.url = (options?: RouteQueryOptions) => {
+
+
+
+
+    return product.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:12
+* @route '/products'
+*/
+product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: product.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:12
+* @route '/products'
+*/
+product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: product.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:12
+* @route '/products'
+*/
+const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: product.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:12
+* @route '/products'
+*/
+productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: product.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:12
+* @route '/products'
+*/
+productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: product.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+product.form = productForm
+
+/**
+* @see routes/web.php:16
+* @route '/services'
+*/
+export const product = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: product.url(options),
+    method: 'get',
+})
+
+product.definition = {
+    methods: ["get","head"],
+    url: '/services',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:16
+* @route '/services'
+*/
+product.url = (options?: RouteQueryOptions) => {
+
+
+
+
+    return product.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:16
+* @route '/services'
+*/
+product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: product.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/services'
+*/
+product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: product.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/services'
+*/
+const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: product.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/services'
+*/
+productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: product.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/services'
+*/
+productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: product.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+product.form = productForm

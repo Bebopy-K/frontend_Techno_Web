@@ -18,7 +18,7 @@ import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
-  <Navbar />
+  <!-- <Navbar /> -->
   <Hero />
   <Products />
   <Services />
@@ -33,5 +33,5 @@ import Footer from "@/components/Footer.vue";
   <Pricing />
   <FAQ />
   <Contact />
-  <Footer />
+  <!-- <Footer /> -->
 </template>
