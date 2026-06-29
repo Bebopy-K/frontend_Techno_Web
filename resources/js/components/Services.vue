@@ -52,10 +52,11 @@ const iconMap: Record<string, any> = {
   <section
     id="services"
     class="container py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6"
+    data-aos="fade-up" data-aos-duration="1000"
   >
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-12">
       <div class="space-y-2 text-left">
-        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Services</p>
+        <p class="text-sm font-semibold tracking-wider text-primary uppercase">layanan</p>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
           Layanan Ekosistem Digital Kami
         </h2>

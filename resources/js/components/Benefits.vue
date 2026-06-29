@@ -19,27 +19,27 @@ interface BenefitsProps {
 const benefitList: BenefitsProps[] = [
   {
     icon: "blocks",
-    title: "Build Brand Trust",
+    title: "Membangun Kepercayaan Brand",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.",
+      "Luncurkan aplikasi yang andal dan sangat aman. Proses pengembangan kami yang mendetail serta tim yang tepercaya memastikan kehadiran digital Anda mencerminkan profesionalisme dan keamanan tinggi sejak hari pertama.",
   },
   {
     icon: "lineChart",
-    title: "More Leads",
+    title: "Menghasilkan Lebih Banyak Prospek",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, natus consectetur.",
+      "Dengan layanan serba ada (all-in-one) kami yang komprehensif, kami tidak hanya menulis kode—kami membangun solusi web yang cepat dan teroptimasi penuh untuk memikat audiens target Anda dan mendongkrak trafik bisnis Anda.",
   },
   {
     icon: "wallet",
-    title: "Higher Conversions",
+    title: "Konversi yang Lebih Tinggi",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur. A odio velit cum aliquam",
+      "Ubah pengunjung biasa menjadi pelanggan setia. Perpaduan antara biaya pengembangan yang ramah di kantong dan penyempurnaan yang berorientasi pada konsumen menjamin pengalaman UI/UX yang mulus demi menghasilkan ROI maksimal.",
   },
   {
     icon: "sparkle",
-    title: "Test Marketing Ideas",
+    title: "Uji Ide Pemasaran secara Cepat",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.",
+      "Bergerak cepat dan lampaui kompetitor Anda. Model startup kami yang agil dan bebas birokrasi memungkinkan Anda meluncurkan MVP dengan cepat, mengeksplorasi fitur-fitur baru, dan beradaptasi tanpa hambatan administratif.",
   },
 ];
 
@@ -65,10 +65,11 @@ const iconMap: Record<
   <section
     id="benefits"
     class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
+    data-aos="fade-up" data-aos-duration="1000"
   >
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-12">
       <div class="space-y-2 text-left">
-        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Benefits</p>
+        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Keuntungan</p>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
           Keuntungan memilih kami
         </h2>
@@ -92,12 +93,6 @@ const iconMap: Record<
                 :is="iconMap[icon]"
               />
             </div>
-
-            <span
-              class="text-4xl text-muted-foreground/15 font-medium transition-all duration-200 group-hover/number:text-primary/20 tracking-tight"
-            >
-              0{{ index + 1 }}
-            </span>
           </div>
 
           <CardTitle class="text-lg font-bold text-foreground group-hover/number:text-primary transition-colors duration-200 text-left">

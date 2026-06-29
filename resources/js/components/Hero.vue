@@ -23,7 +23,7 @@ const shortcutList: ShortcutProps[] = [
     icon: FileText,
     title: "Artikel",
     description: "Baca wawasan terbaru, tutorial, dan tren teknologi di blog kami.",
-    href: "/articles",
+    href: "/news",
   },
   {
     icon: Briefcase,
@@ -35,9 +35,12 @@ const shortcutList: ShortcutProps[] = [
 </script>
 
 <template>
-  <section class="relative min-h-[700px] flex flex-col justify-center overflow-hidden bg-background isolation-auto w-full">
+  <section class="relative min-h-[1100px] flex flex-col justify-center overflow-hidden bg-background isolation-auto w-full"
+  >
     
-    <div class="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10 w-full">
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10 w-full"
+          data-aos="fade-up" data-aos-duration="1000"
+    >
       <div
         class="grid place-items-center gap-8 mx-auto py-12 w-full"
       >

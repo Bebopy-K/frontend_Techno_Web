@@ -51,12 +51,13 @@ const iconMap: Record<string, any> = {
   <section
     id="products"
     class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
+    data-aos="fade-up" data-aos-duration="1000"
   >
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-12">
       <div class="space-y-2 text-left">
-        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Products</p>
+        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Produk</p>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-          Produk yang telah dihasilkan
+          Hasil produk kami
         </h2>
       </div>
       <p class="text-muted-foreground max-w-md text-sm sm:text-base">
@@ -125,7 +126,7 @@ const iconMap: Record<string, any> = {
 
           <CardFooter class="flex flex-col items-stretch gap-4 pt-6 mt-auto border-t border-border/60 bg-muted/20 dark:bg-muted/5 rounded-b-xl">
             <Button class="w-full font-semibold shadow-sm" variant="default">
-              Lihat Detail Produk
+              Lihat Produk
             </Button>
           </CardFooter>
         </Card>
