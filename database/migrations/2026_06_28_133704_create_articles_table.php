@@ -17,12 +17,12 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnDelete();
-
+            $table->foreignId('service_id')
+                ->constrained()
+                ->cascadeOnDelete();
             $table->string('title');
-            $table->text('content');
+            $table->longText('content');
             $table->string('image');
-            $table->string('tags');
-
             $table->timestamps();
         });
     }

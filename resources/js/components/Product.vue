@@ -1,50 +1,21 @@
 <script setup lang="ts">
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  Terminal, 
-  Cpu, 
-  HardDrive, 
-  ShieldCheck, 
-  Users,
-  Check 
-} from "lucide-vue-next";
+import { Check } from "lucide-vue-next";
 
-interface ProductProps {
-  icon: string;
-  image: string;
-  title: string;
-  category: string;
-  description: string;
-  features: string[];
+interface Product {
+    id: number;
+    title: string;
+    description: string;
+    category: string;
+    image: string;
+    features: string[];
 }
 
-const productList: ProductProps[] = [
-  {
-    icon: "govtech",
-    image: '@/components/public/proudct1.jpeg', 
-    title: "Sistem Notifikasi Pajak Daerah (GovTech)",
-    category: "LMS Kampus dan Sekolah",
-    description: "Modul backend siap pakai untuk automasi blast pengingat pajak kendaraan terintegrasi API gateway.",
-    features: ["Integrasi WhatsApp/SMS API", "Dasbor Analitik Real-time", "Multi-role Access"]
-  }, 
-  {
-    icon: "govtech",
-    image: '../../public/product2.svg', 
-    title: "Sistem Notifikasi Pajak Daerah (GovTech)",
-    category: "LMS Kampus dan Sekolah",
-    description: "Modul backend siap pakai untuk automasi blast pengingat pajak kendaraan terintegrasi API gateway.",
-    features: ["Integrasi WhatsApp/SMS API", "Dasbor Analitik Real-time", "Multi-role Access"]
-  },
-];
+defineProps<{
+    products: Product[];
+}>();
 
-const iconMap: Record<string, any> = {
-  govtech: Terminal,
-  nmt: Cpu,
-  infrastructure: HardDrive,
-  rbac: ShieldCheck,
-  edutech: Users,
-};
 </script>
 
 <template>
@@ -67,8 +38,8 @@ const iconMap: Record<string, any> = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 items-stretch">
       <div
-        v-for="({ icon, image, title, category, description, features }) in productList"
-        :key="title"
+        v-for="product in products"
+        :key="product.id"
         class="flex"
       >
         <Card
@@ -77,8 +48,8 @@ const iconMap: Record<string, any> = {
           <div>
             <div class="relative w-full aspect-video sm:aspect-[21/9] lg:aspect-[32/9] overflow-hidden bg-muted">
               <img 
-                :src="image" 
-                :alt="title" 
+                :src="'/storage/' + product.image"
+                :alt="product.title"
                 class="w-full h-full object-cover object-center group-hover/product:scale-105 transition-transform duration-500 ease-out"
                 loading="lazy"
               />
@@ -88,38 +59,34 @@ const iconMap: Record<string, any> = {
             <CardHeader class="pt-6 pb-1">
               <div class="flex justify-between items-center mb-4">
                 <div class="p-2.5 bg-primary/10 rounded-xl group-hover/product:bg-primary group-hover/product:text-primary-foreground transition-colors duration-200 text-primary">
-                  <component
-                    class="size-5"
-                    :is="iconMap[icon]"
-                  />
                 </div>
                 <span class="text-[11px] font-medium tracking-wider uppercase px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground border border-border/50">
-                  {{ category }}
+                  {{ product.category }}
                 </span>
               </div>
               
               <CardTitle class="text-xl font-bold text-foreground group-hover/product:text-primary transition-colors duration-200 min-h-[56px] flex items-center">
-                {{ title }}
+                {{ product.title }}
               </CardTitle>
             </CardHeader>
 
             <CardContent class="space-y-6">
               <p class="text-muted-foreground text-sm leading-relaxed">
-                {{ description }}
+                {{ product.description }}
               </p>
 
               <div class="space-y-2.5 pt-2">
                 <p class="text-xs font-semibold uppercase text-foreground/70 tracking-wider">Key Features:</p>
                 <ul class="space-y-2">
-                  <li 
-                    v-for="feature in features" 
-                    :key="feature"
-                    class="flex items-start text-sm text-muted-foreground"
+                  <li
+                      v-for="feature in product.features"
+                      :key="feature"
+                      class="flex items-start text-sm text-muted-foreground"
                   >
-                    <Check class="size-4 text-emerald-500 mr-2.5 mt-0.5 flex-shrink-0" />
-                    <span>{{ feature }}</span>
+                      <Check class="size-4 text-emerald-500 mr-2 mt-1" />
+                      {{ feature }}
                   </li>
-                </ul>
+              </ul>
               </div>
             </CardContent>
           </div>

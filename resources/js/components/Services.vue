@@ -1,24 +1,40 @@
 <script setup lang="ts">
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  Globe, 
-  Smartphone, 
-  Monitor, 
-  Cpu, 
-  Paintbrush, 
-  Network, 
-  Video, 
-  HelpCircle, 
-  BrainCircuit, 
+import {
+  Globe,
+  Smartphone,
+  Monitor,
+  Cpu,
+  Paintbrush,
+  Network,
+  Video,
+  HelpCircle,
+  BrainCircuit,
   GraduationCap,
   ArrowRight
 } from "lucide-vue-next";
 
-interface ServiceProps {
-  icon: string;
-  title: string;
-  href: string;
+const iconMap = {
+  1: Globe,
+  2: Smartphone,
+  3: Monitor,
+  4: Cpu,
+  5: Paintbrush,
+  6: Network,
+  7: Video,
+  8: HelpCircle,
+  9: BrainCircuit,
+  10: GraduationCap,
+};
+
+interface Service {
+    id: number;
+    name: string;
 }
+
+defineProps<{
+    services: Service[];
+}>();
 
 const serviceList: ServiceProps[] = [
   { icon: "web", title: "Website", href: "#govtech" },
@@ -33,19 +49,6 @@ const serviceList: ServiceProps[] = [
   { icon: "lms", title: "LMS Kampus & Sekolah", href: "#edutech" },
 ];
 
-// Fixed: Icons correctly mapped to individual values with modern fallback
-const iconMap: Record<string, any> = {
-  web: Globe,
-  android: Smartphone,
-  desktop: Monitor,
-  iot: Cpu,
-  design: Paintbrush,
-  network: Network,
-  content: Video,
-  consultant: HelpCircle,
-  ai: BrainCircuit,
-  lms: GraduationCap,
-};
 </script>
 
 <template>
@@ -68,8 +71,8 @@ const iconMap: Record<string, any> = {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
       <div
-        v-for="({ icon, title, href }, index) in serviceList"
-        :key="title"
+        v-for="(service, index) in services"
+        :key="service.id"
         class="flex"
       >
         <a 
@@ -86,13 +89,13 @@ const iconMap: Record<string, any> = {
 
               <div class="p-2 bg-primary/5 rounded-lg group-hover/service:bg-primary group-hover/service:text-primary-foreground transition-colors duration-300 text-primary">
                 <component
-                  class="size-5"
-                  :is="iconMap[icon]"
+                    class="size-5"
+                    :is="iconMap[service.id]"
                 />
               </div>
 
               <CardTitle class="text-base font-semibold text-foreground tracking-tight transition-colors duration-200">
-                {{ title }}
+                {{ service.name }}
               </CardTitle>
             </div>
 

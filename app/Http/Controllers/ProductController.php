@@ -18,6 +18,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'category' => $request->category,
             'image' => $image,
+            'features' => $request -> features,
         ]);
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan.');
 

@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
-            // Admin yang membuat produk
-            $table->foreignId('user_id')
+            // Artikel yang dikomentari
+            $table->foreignId('article_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
-            // Data produk
-            $table->string('title');
-            $table->text('description');
-            $table->string('category');
-            $table->string('image');
-            $table->json('features')->nullable();
+            // Data pengunjung
+            $table->string('name');
+            $table->string('email');
+
+            // Isi komentar
+            $table->text('comment');
+
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('comments');
     }
 };

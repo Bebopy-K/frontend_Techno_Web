@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\ArticleController::store
-* @see app/Http/Controllers/ArticleController.php:12
+* @see app/Http/Controllers/ArticleController.php:13
 * @route '/articles'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\ArticleController::store
-* @see app/Http/Controllers/ArticleController.php:12
+* @see app/Http/Controllers/ArticleController.php:13
 * @route '/articles'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -29,7 +29,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ArticleController::store
-* @see app/Http/Controllers/ArticleController.php:12
+* @see app/Http/Controllers/ArticleController.php:13
 * @route '/articles'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -39,7 +39,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\ArticleController::store
-* @see app/Http/Controllers/ArticleController.php:12
+* @see app/Http/Controllers/ArticleController.php:13
 * @route '/articles'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -49,7 +49,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \App\Http\Controllers\ArticleController::store
-* @see app/Http/Controllers/ArticleController.php:12
+* @see app/Http/Controllers/ArticleController.php:13
 * @route '/articles'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -61,7 +61,7 @@ store.form = storeForm
 
 /**
 * @see \App\Http\Controllers\ArticleController::destroy
-* @see app/Http/Controllers/ArticleController.php:30
+* @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
 export const destroy = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -76,7 +76,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\ArticleController::destroy
-* @see app/Http/Controllers/ArticleController.php:30
+* @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
 destroy.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -110,7 +110,7 @@ destroy.url = (args: { article: number | { id: number } } | [article: number | {
 
 /**
 * @see \App\Http\Controllers\ArticleController::destroy
-* @see app/Http/Controllers/ArticleController.php:30
+* @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
 destroy.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -120,7 +120,7 @@ destroy.delete = (args: { article: number | { id: number } } | [article: number 
 
 /**
 * @see \App\Http\Controllers\ArticleController::destroy
-* @see app/Http/Controllers/ArticleController.php:30
+* @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
 const destroyForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -135,7 +135,7 @@ const destroyForm = (args: { article: number | { id: number } } | [article: numb
 
 /**
 * @see \App\Http\Controllers\ArticleController::destroy
-* @see app/Http/Controllers/ArticleController.php:30
+* @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
 destroyForm.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

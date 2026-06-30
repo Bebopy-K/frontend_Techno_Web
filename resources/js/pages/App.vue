@@ -15,13 +15,54 @@ import Contact from "@/components/Contact.vue";
 import Article from "@/components/Article.vue"
 // import FAQ from "@/components/FAQ.vue";
 import Footer from "@/components/Footer.vue";
+interface Product {
+    id: number;
+    title: string;
+    description: string;
+    category: string;
+    image: string;
+    features: string[];
+}
+
+interface Service {
+    id: number;
+    name: string;
+}
+
+interface Article {
+    id: number;
+    title: string;
+    content: string;
+    image: string;
+    created_at: string;
+
+    user: {
+        name: string;
+    };
+
+    service: {
+        name: string;
+    };
+
+    comments: {
+        id: number;
+    }[];
+}
+
+const props = defineProps<{
+    products: Product[];
+    services: Service[];
+    articles: Article[];
+}>();
+
+console.log(props.products);
 </script>
 
 <template>
   <!-- <Navbar /> -->
   <Hero />
-  <Products />
-  <Services />
+  <Products :products="props.products"/>
+  <Services :services="props.services"/>
   <Features />
   <Benefits />
   <Team />
@@ -29,7 +70,7 @@ import Footer from "@/components/Footer.vue";
   <HowItWorks />
   <Testimonials />
   <Community />
-  <Article />
+  <Article :articles="props.articles"/>
   <Pricing />
   <FAQ />
   <Contact />
