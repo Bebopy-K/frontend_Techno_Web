@@ -2,20 +2,19 @@
 import { ref, computed } from "vue";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  Terminal, 
-  Cpu, 
-  HardDrive, 
-  ShieldCheck, 
-  Users,
-  Check,
-  Search,
-  ChevronDown
-} from "lucide-vue-next";
+import { Check, Search, ChevronDown } from "lucide-vue-next";
+
+interface ProductFromApi {
+  id: number;
+  image: string;
+  title: string;
+  category: string;
+  description: string;
+  features?: string[] | null;
+}
 
 interface ProductProps {
   id: number;
-  icon: string;
   image: string;
   title: string;
   category: string;
@@ -23,78 +22,38 @@ interface ProductProps {
   features: string[];
 }
 
+const props = defineProps<{
+  products: ProductFromApi[];
+}>();
+
 // State Kontrol Interaksi Filter
 const searchQuery = ref("");
 const selectedCategory = ref("All");
 const sortBy = ref("Default");
 const isSortDropdownOpen = ref(false);
 
-// Sumber Data Katalog Produk Komplit (Kombinasi portofolio & tech stack kamu)
-const productList = ref<ProductProps[]>([
-  {
-    id: 1,
-    icon: "govtech",
-    image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1470&auto=format&fit=crop", 
-    title: "Sistem Notifikasi Pajak Daerah (GovTech)",
-    category: "GovTech Solutions",
-    description: "Modul backend siap pakai untuk automasi blast pengingat jatuh tempo pajak kendaraan yang terintegrasi langsung dengan API gateway massal.",
-    features: ["Integrasi WhatsApp/SMS API", "Dasbor Analitik Real-time", "Multi-role Access Control (RBAC)"]
-  }, 
-  {
-    id: 2,
-    icon: "rbac",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1470&auto=format&fit=crop", 
-    title: "E-Commerce Enterprise Core & RBAC Layer",
-    category: "Web Applications",
-    description: "Sistem manajemen hak akses berlapis (Role-Based Access Control) berbasis Laravel dengan integrasi OAuth 2.0 (Google & GitHub) untuk toko online skala besar.",
-    features: ["OAuth 2.0 & JWT Authentication", "Dynamic Permission Management", "Audit Trails Activity Logs"]
-  },
-  {
-    id: 3,
-    icon: "nmt",
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1632&auto=format&fit=crop", 
-    title: "Neural Machine Translation (NMT) Engine",
-    category: "Machine Learning",
-    description: "Mesin penerjemah pintar yang dikembangkan khusus untuk preservasi bahasa daerah dari kepunahan menggunakan pemrosesan dataset korpus teks lokal.",
-    features: ["Custom Dataset Training Script", "High-Accuracy Localized Context", "REST API Integration ready"]
-  },
-  {
-    id: 4,
-    icon: "infrastructure",
-    image: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=1594&auto=format&fit=crop", 
-    title: "Hybrid-Cloud HomeLab & Zero Trust Guard",
-    category: "Infrastructure",
-    description: "Arsitektur jaringan server mandiri berbasis Proxmox VE, diamankan penuh lewat rute Cloudflare Tunnels dan Tailscale Zero Trust Networking.",
-    features: ["Proxmox Virtualization Hypervisor", "Zero Exposed Ports Architecture", "Secure Encrypted Remote Access"]
-  },
-  {
-    id: 5,
-    icon: "edutech",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1470&auto=format&fit=crop", 
-    title: "Sistem Manajemen Pembelajaran (LMS Premium)",
-    category: "Edutech Platform",
-    description: "Platform manajemen edukasi interaktif untuk instansi sekolah dan universitas guna memantau materi kuliah, pengumpulan tugas, dan rekapitulasi nilai otomatis.",
-    features: ["Sleek UI/UX Course View", "Automated Student Report Card", "Interactive Quiz Module"]
-  }
-]);
-
-// Pemetaan Ikon Komponen Dinamis
-const iconMap: Record<string, any> = {
-  govtech: Terminal,
-  nmt: Cpu,
-  infrastructure: HardDrive,
-  rbac: ShieldCheck,
-  edutech: Users,
-};
+// Normalisasi data dari backend agar konsisten dengan UI
+const productList = computed<ProductProps[]>(() => {
+  return (props.products ?? []).map((p) => ({
+    id: p.id,
+    title: p.title,
+    category: p.category,
+    description: p.description,
+    // image di DB sudah tersimpan seperti: products/<filename>.jpg
+    image: p.image ? "/storage/" + p.image.replace(/^\/+/, "") : "",
+    features: Array.isArray(p.features) ? p.features : [],
+  }));
+});
 
 // Pengambilan otomatis kategori unik dari data produk
 const categories = computed(() => {
-  return ["All", ...new Set(productList.value.map(p => p.category))];
+  return ["All", ...new Set(productList.value.map((p) => p.category))];
 });
 
 // Pemrosesan Filter Live Search, Pil Kategori, dan Sorting
 const filteredProducts = computed(() => {
   let result = [...productList.value];
+
 
   // 1. Filter Kategori Pil
   if (selectedCategory.value !== "All") {
@@ -193,7 +152,7 @@ const filteredProducts = computed(() => {
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 items-stretch">
       <div
-        v-for="({ icon, image, title, category, description, features }) in filteredProducts"
+v-for="({ image, title, category, description, features }) in filteredProducts"
         :key="title"
         class="flex"
       >
@@ -214,10 +173,7 @@ const filteredProducts = computed(() => {
             <CardHeader class="pt-6 pb-1">
               <div class="flex justify-between items-center mb-4">
                 <div class="p-2.5 bg-primary/10 rounded-xl group-hover/product:bg-primary group-hover/product:text-primary-foreground transition-colors duration-200 text-primary">
-                  <component
-                    class="size-5"
-                    :is="iconMap[icon]"
-                  />
+
                 </div>
                 <span class="text-[11px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground border border-border/50">
                   {{ category }}

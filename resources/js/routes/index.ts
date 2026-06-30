@@ -230,80 +230,80 @@ registerForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 register.form = registerForm
 
 /**
-* @see \Inertia\Controller::__invoke
-* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
-* @route '/'
+* @see \App\Http\Controllers\DashboardController::dashboard
+* @see app/Http/Controllers/DashboardController.php:12
+* @route '/dashboard'
 */
-export const home = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: home.url(options),
+export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: dashboard.url(options),
     method: 'get',
 })
 
-home.definition = {
+dashboard.definition = {
     methods: ["get","head"],
-    url: '/',
+    url: '/dashboard',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \Inertia\Controller::__invoke
-* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
-* @route '/'
+* @see \App\Http\Controllers\DashboardController::dashboard
+* @see app/Http/Controllers/DashboardController.php:12
+* @route '/dashboard'
 */
-home.url = (options?: RouteQueryOptions) => {
+dashboard.url = (options?: RouteQueryOptions) => {
 
 
 
 
-    return home.definition.url + queryParams(options)
+    return dashboard.definition.url + queryParams(options)
 }
 
 /**
-* @see \Inertia\Controller::__invoke
-* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
-* @route '/'
+* @see \App\Http\Controllers\DashboardController::dashboard
+* @see app/Http/Controllers/DashboardController.php:12
+* @route '/dashboard'
 */
-home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: home.url(options),
+dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: dashboard.url(options),
     method: 'get',
 })
 
 /**
-* @see \Inertia\Controller::__invoke
-* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
-* @route '/'
+* @see \App\Http\Controllers\DashboardController::dashboard
+* @see app/Http/Controllers/DashboardController.php:12
+* @route '/dashboard'
 */
-home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: home.url(options),
+dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: dashboard.url(options),
     method: 'head',
 })
 
 /**
-* @see \Inertia\Controller::__invoke
-* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
-* @route '/'
+* @see \App\Http\Controllers\DashboardController::dashboard
+* @see app/Http/Controllers/DashboardController.php:12
+* @route '/dashboard'
 */
-const homeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: home.url(options),
+const dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: dashboard.url(options),
     method: 'get',
 })
 
 /**
-* @see \Inertia\Controller::__invoke
-* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
-* @route '/'
+* @see \App\Http\Controllers\DashboardController::dashboard
+* @see app/Http/Controllers/DashboardController.php:12
+* @route '/dashboard'
 */
-homeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: home.url(options),
+dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: dashboard.url(options),
     method: 'get',
 })
 
 /**
-* @see \Inertia\Controller::__invoke
-* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
-* @route '/'
+* @see \App\Http\Controllers\DashboardController::dashboard
+* @see app/Http/Controllers/DashboardController.php:12
+* @route '/dashboard'
 */
-homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: home.url({
+dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: dashboard.url({
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -312,10 +312,10 @@ homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     method: 'get',
 })
 
-home.form = homeForm
+dashboard.form = dashboardForm
 
 /**
-* @see routes/web.php:12
+* @see routes/web.php:63
 * @route '/products'
 */
 export const product = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -329,7 +329,7 @@ product.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:12
+* @see routes/web.php:63
 * @route '/products'
 */
 product.url = (options?: RouteQueryOptions) => {
@@ -341,7 +341,7 @@ product.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:12
+* @see routes/web.php:63
 * @route '/products'
 */
 product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -350,7 +350,7 @@ product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:12
+* @see routes/web.php:63
 * @route '/products'
 */
 product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -359,7 +359,7 @@ product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:12
+* @see routes/web.php:63
 * @route '/products'
 */
 const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -368,7 +368,7 @@ const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:12
+* @see routes/web.php:63
 * @route '/products'
 */
 productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -377,7 +377,7 @@ productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:12
+* @see routes/web.php:63
 * @route '/products'
 */
 productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -393,7 +393,7 @@ productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 product.form = productForm
 
 /**
-* @see routes/web.php:16
+* @see routes/web.php:69
 * @route '/services'
 */
 export const product = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -407,7 +407,7 @@ product.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:16
+* @see routes/web.php:69
 * @route '/services'
 */
 product.url = (options?: RouteQueryOptions) => {
@@ -419,7 +419,7 @@ product.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:16
+* @see routes/web.php:69
 * @route '/services'
 */
 product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -428,7 +428,7 @@ product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:16
+* @see routes/web.php:69
 * @route '/services'
 */
 product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -437,7 +437,7 @@ product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:16
+* @see routes/web.php:69
 * @route '/services'
 */
 const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -446,7 +446,7 @@ const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:16
+* @see routes/web.php:69
 * @route '/services'
 */
 productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -455,7 +455,7 @@ productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:16
+* @see routes/web.php:69
 * @route '/services'
 */
 productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

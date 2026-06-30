@@ -9,14 +9,14 @@ import MainLayout from '@/pages/MainLayout.vue';
 createInertiaApp({
     resolve: async (name) => {
         const page = await resolvePageComponent(
-            `./Pages/${name}.vue`, 
+            `./Pages/${name}.vue`,
             import.meta.glob<DefineComponent>('./Pages/**/*.vue')
         );
-        
+
         if (page.default.layout === undefined) {
             page.default.layout = MainLayout;
         }
-        
+
         return page;
     },
     setup({ el, App, props, plugin }) {
