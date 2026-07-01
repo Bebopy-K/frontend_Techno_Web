@@ -18,6 +18,10 @@ passkeys.definition = {
 * @route '/.well-known/passkey-endpoints'
 */
 passkeys.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return passkeys.definition.url + queryParams(options)
 }
 

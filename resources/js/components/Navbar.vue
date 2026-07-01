@@ -33,11 +33,11 @@ interface RouteProps {
 const mode = useColorMode();
 
 const routeList: RouteProps[] = [
-  { href: "#products", label: "Produk" },
-  { href: "#services", label: "Layanan" },
-  { href: "#news", label: "Artikel" },
-  { href: "#team", label: "Tim Kami" },
-  { href: "#contact", label: "Kontak" },
+  { href: "/products", label: "Produk" },
+  { href: "/services", label: "Layanan" },
+  { href: "/news", label: "Artikel" },
+  { href: "/#team", label: "Tim Kami" },
+  { href: "/#contact", label: "Kontak" },
 ];
 
 const isOpen = ref<boolean>(false);
@@ -49,7 +49,7 @@ const logoSrc = computed(() => {
 </script>
 
 <template>
-  <div class="fixed top-4 inset-x-0 z-50 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
+  <div class="fixed top-4 inset-x-0 z-50 w-full max-w-6xl mx-auto pointer-events-none">
     <header
       class="w-full flex justify-between items-center px-4 md:px-6 py-2.5 pointer-events-auto transition-all duration-300 shadow-sm border border-border/50 bg-background/80 backdrop-blur-md text-foreground rounded-2xl"
     >

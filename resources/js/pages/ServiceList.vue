@@ -26,18 +26,16 @@ interface ServiceProps {
   features: string[];
 }
 
-// State Kontrol Interaksi Filter
 const searchQuery = ref("");
 const selectedCategory = ref("All");
 const sortBy = ref("Default");
 const isSortDropdownOpen = ref(false);
 
-// Data Katalog Layanan Bisnis Komplit (Ekspansi dari file Services.vue)
 const serviceList = ref<ServiceProps[]>([
   {
     id: 1,
     icon: "web",
-    title: "Pengembangan Website & Web Apps",
+    title: "Website",
     category: "Software Development",
     description: "Pembuatan landing page premium, website company profile, hingga web application kustom berbasis Laravel dan Vue.js yang cepat, aman, dan SEO-friendly.",
     features: ["Arsitektur SPA (Single Page Application)", "Optimasi Kecepatan & Core Web Vitals", "Integrasi Database & Restful API"]
@@ -45,7 +43,7 @@ const serviceList = ref<ServiceProps[]>([
   {
     id: 2,
     icon: "android",
-    title: "Pengembangan Aplikasi Mobile (Android)",
+    title: "Aplikasi Mobile",
     category: "Software Development",
     description: "Solusi pembuatan aplikasi android native maupun lintas platform dengan performa mulus untuk mendukung mobilitas operasional bisnis Anda.",
     features: ["UI/UX Mobile Responsif", "Push Notification System", "Offline Mode Capabilities"]
@@ -53,7 +51,7 @@ const serviceList = ref<ServiceProps[]>([
   {
     id: 3,
     icon: "desktop",
-    title: "Aplikasi Komputer (Desktop Software)",
+    title: "Desktop",
     category: "Software Development",
     description: "Rancang bangun perangkat lunak berbasis desktop untuk kebutuhan internal manajemen perusahaan, sistem POS (Point of Sales), hingga automasi lokal.",
     features: ["Cross-Platform Deployment", "Sistem Manajemen Keamanan Lokal", "Sinkronisasi Cloud Hybrid"]
@@ -61,7 +59,7 @@ const serviceList = ref<ServiceProps[]>([
   {
     id: 4,
     icon: "iot",
-    title: "Internet of Things (IoT) & Embedded System",
+    title: "Internet of Things (IOT)",
     category: "Hardware & Automation",
     description: "Integrasi perangkat keras pintar, sensor, dan mikrokontroler untuk automasi industri, monitoring cerdas, atau sistem kendali jarak jauh.",
     features: ["Real-time Data Telemetry", "Custom Microcontroller Integration", "Sistem Dasbor Kontrol IoT"]
@@ -69,7 +67,7 @@ const serviceList = ref<ServiceProps[]>([
   {
     id: 5,
     icon: "design",
-    title: "Desain Digital & UI/UX Research",
+    title: "Desain Digital",
     category: "Creative & Design",
     description: "Layanan perancangan antarmuka digital (UI/UX) untuk aplikasi web dan mobile yang modern, ergonomis, berpusat pada kenyamanan pengguna (user-centered).",
     features: ["High-Fidelity Wireframing & Prototyping", "User Journey Mapping", "Design System & Asset Handover"]
@@ -77,30 +75,45 @@ const serviceList = ref<ServiceProps[]>([
   {
     id: 6,
     icon: "network",
-    title: "Rancang Bangun Jaringan & Infrastruktur",
+    title: "Sistem Jaringan",
     category: "Infrastructure",
     description: "Implementasi topologi jaringan komputer aman, manajemen router/switch, konfigurasi VPN, hingga arsitektur Zero Trust menggunakan Cloudflare & Tailscale.",
     features: ["Zero Trust Networking Setup", "Network Monitoring & Alerting", "Firewall & Security Hardening"]
   },
   {
     id: 7,
+    icon: "content",
+    title: "Content Creator",
+    category: "Creative & Design",
+    description: "Produksi konten multimedia kreatif, video marketing, brand storytelling, dan manajemen aset visual berkualitas tinggi untuk meningkatkan engagment digital.",
+    features: ["High-Quality Video Editing", "Creative Scriptwriting & Directing", "Social Media Content Optimization"]
+  },
+  {
+    id: 8,
+    icon: "consultant",
+    title: "IT Consultant",
+    category: "Infrastructure",
+    description: "Layanan konsultasi arsitektur IT komprehensif, audit keamanan sistem, perencanaan digital transformasi, dan manajemen risiko teknologi perusahaan.",
+    features: ["IT Infrastructure Audit", "Technology Roadmap Planning", "Security & Risk Assessment"]
+  },
+  {
+    id: 9,
     icon: "ai",
-    title: "Implementasi Artificial Intelligence & NMT",
+    title: "Artificial Intelligence (AI)",
     category: "Advanced Tech",
     description: "Integrasi modul kecerdasan buatan, pemrosesan bahasa alami (NLP), hingga pengembangan model Neural Machine Translation khusus untuk preservasi data teks.",
     features: ["Model Fine-Tuning & Training", "Custom Dataset Text Corpus Pipeline", "REST API Integration Engine"]
   },
   {
-    id: 8,
+    id: 10,
     icon: "lms",
-    title: "Sistem LMS Kampus dan Sekolah",
+    title: "Sistem LMS Kampus & Sekolah",
     category: "Advanced Tech",
     description: "Penyediaan infrastruktur Learning Management System (LMS) siap pakai untuk digitalisasi materi edukasi, kuis interaktif, dan rekapitulasi nilai.",
     features: ["Multi-Role (Dosen, Mahasiswa, Admin)", "E-Report Generation", "Sleek Portal Interface"]
-  }
+  },
 ]);
 
-// Pemetaan Ikon Komponen Dinamis Sesuai Berkas Services.vue Kamu
 const iconMap: Record<string, any> = {
   web: Globe,
   android: Smartphone,
@@ -195,7 +208,7 @@ const filteredServices = computed(() => {
           @click="isSortDropdownOpen = !isSortDropdownOpen"
           class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-muted/40 border border-border/60 text-xs font-semibold rounded-full shadow-xs text-foreground hover:bg-background transition"
         >
-          Urutan: {{ sortBy }}
+          {{ sortBy }}
           <ChevronDown class="size-3.5 text-muted-foreground" />
         </button>
         <div 

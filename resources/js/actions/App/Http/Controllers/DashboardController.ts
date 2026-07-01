@@ -20,6 +20,10 @@ index.definition = {
 * @route '/dashboard'
 */
 index.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return index.definition.url + queryParams(options)
 }
 

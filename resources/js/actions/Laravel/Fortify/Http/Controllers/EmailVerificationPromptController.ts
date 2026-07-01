@@ -20,6 +20,10 @@ __invoke.definition = {
 * @route '/email/verify'
 */
 __invoke.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return __invoke.definition.url + queryParams(options)
 }
 

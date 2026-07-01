@@ -20,6 +20,10 @@ create.definition = {
 * @route '/two-factor-challenge'
 */
 create.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return create.definition.url + queryParams(options)
 }
 
@@ -101,6 +105,10 @@ store.definition = {
 * @route '/two-factor-challenge'
 */
 store.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return store.definition.url + queryParams(options)
 }
 

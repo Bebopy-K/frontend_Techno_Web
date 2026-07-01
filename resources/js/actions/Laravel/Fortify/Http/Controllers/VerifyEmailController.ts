@@ -20,6 +20,7 @@ __invoke.definition = {
 * @route '/email/verify/{id}/{hash}'
 */
 __invoke.url = (args: { id: string | number, hash: string | number } | [id: string | number, hash: string | number ], options?: RouteQueryOptions) => {
+
     if (Array.isArray(args)) {
         args = {
             id: args[0],
@@ -28,6 +29,7 @@ __invoke.url = (args: { id: string | number, hash: string | number } | [id: stri
     }
 
     args = applyUrlDefaults(args)
+
 
     const parsedArgs = {
         id: args.id,
