@@ -13,7 +13,7 @@ interface Article {
     user: {
         name: string;
     };
-    services: {
+    service: {
         name: string;
     };
     comments: {
