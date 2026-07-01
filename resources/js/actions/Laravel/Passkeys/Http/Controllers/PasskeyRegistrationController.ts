@@ -20,10 +20,6 @@ index.definition = {
 * @route '/user/passkeys/options'
 */
 index.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return index.definition.url + queryParams(options)
 }
 
@@ -105,10 +101,6 @@ store.definition = {
 * @route '/user/passkeys'
 */
 store.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return store.definition.url + queryParams(options)
 }
 
@@ -180,7 +172,6 @@ destroy.url = (args: { passkey: number | { id: number } } | [passkey: number | {
     }
 
     args = applyUrlDefaults(args)
-
 
     const parsedArgs = {
         passkey: typeof args.passkey === 'object'

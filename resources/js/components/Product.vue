@@ -1,99 +1,106 @@
 <script setup lang="ts">
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-vue-next";
+import { Check, ArrowUpRight } from "lucide-vue-next";
 
 interface Product {
-    id: number;
-    title: string;
-    description: string;
-    category: string;
-    image: string;
-    features: string[];
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  features: string[];
 }
 
 defineProps<{
-    products: Product[];
+  products: Product[];
 }>();
-
 </script>
 
 <template>
   <section
     id="products"
-    class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
-    data-aos="fade-up" data-aos-duration="1000"
+    class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6 relative"
+    data-aos="fade-up" 
+    data-aos-duration="1000"
   >
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-12">
-      <div class="space-y-2 text-left">
-        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Produk</p>
+    <!-- Section Executive Header Elements -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-16 border-b border-border/60">
+      <div class="space-y-3 text-left">
+        <div class="inline-flex items-center gap-2 px-1 py-1 rounded-full text-primary text-xs font-semibold uppercase tracking-wider w-fit">
+          Produk
+        </div>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-          Hasil produk kami
+          Portofolio Solusi Digital
         </h2>
       </div>
-      <p class="text-muted-foreground max-w-md text-sm sm:text-base">
-        Solusi teknologi end-to-end terintegrasi untuk mempercepat transformasi digital bisnis dan institusi Anda.
+      <p class="text-muted-foreground max-w-md text-sm sm:text-base leading-relaxed">
+        Sistem perangkat lunak berskala industri yang dirancang khusus untuk mengoptimalkan efisiensi eksekusi bisnis Anda.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 items-stretch">
+    <!-- Product Solution Matrix Grid Architecture -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
       <div
         v-for="product in products"
         :key="product.id"
         class="flex"
       >
         <Card
-          class="bg-card dark:bg-card/50 transition-all duration-200 group/product w-full border border-border/60 hover:border-primary/30 flex flex-col justify-between shadow-sm overflow-hidden"
+          class="bg-card/50 dark:bg-card/30 backdrop-blur-sm transition-all duration-300 group/product w-full border border-border/60 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/[0.02] flex flex-col justify-between overflow-hidden rounded-2xl"
         >
           <div>
-            <div class="relative w-full aspect-video sm:aspect-[21/9] lg:aspect-[32/9] overflow-hidden bg-muted">
+            <!-- Professional Framed Interface Context Mockup Media Container -->
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-muted border-b border-border/40">
               <img 
                 :src="'/storage/' + product.image"
                 :alt="product.title"
-                class="w-full h-full object-cover object-center group-hover/product:scale-105 transition-transform duration-500 ease-out"
+                class="w-full h-full object-cover object-top group-hover/product:scale-[1.03] transition-transform duration-700 ease-out"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent"></div>
+              
+              <!-- Subtle Category Floater Pill -->
+              <span class="absolute top-4 right-4 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full bg-background/90 text-foreground border border-border/40 backdrop-blur-md shadow-sm">
+                {{ product.category }}
+              </span>
             </div>
 
-            <CardHeader class="pt-6 pb-1">
-              <div class="flex justify-between items-center mb-4">
-                <div class="p-2.5 bg-primary/10 rounded-xl group-hover/product:bg-primary group-hover/product:text-primary-foreground transition-colors duration-200 text-primary">
-                </div>
-                <span class="text-[11px] font-medium tracking-wider uppercase px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground border border-border/50">
-                  {{ product.category }}
-                </span>
-              </div>
-              
-              <CardTitle class="text-xl font-bold text-foreground group-hover/product:text-primary transition-colors duration-200 min-h-[56px] flex items-center">
+            <CardHeader class="pt-6 pb-2 px-6">
+              <CardTitle class="text-xl sm:text-2xl font-bold text-foreground tracking-tight group-hover/product:text-primary transition-colors duration-200 flex items-center justify-between gap-4">
                 {{ product.title }}
               </CardTitle>
             </CardHeader>
 
-            <CardContent class="space-y-6">
-              <p class="text-muted-foreground text-sm leading-relaxed">
+            <CardContent class="space-y-6 px-6 pb-6">
+              <p class="text-muted-foreground text-sm leading-relaxed min-h-[40px]">
                 {{ product.description }}
               </p>
 
-              <div class="space-y-2.5 pt-2">
-                <p class="text-xs font-semibold uppercase text-foreground/70 tracking-wider">Key Features:</p>
-                <ul class="space-y-2">
+              <!-- Enterprise Capability List Component -->
+              <div class="space-y-3 pt-4 border-t border-border/40">
+                <p class="text-xs font-bold uppercase text-foreground/80 tracking-widest">Spesifikasi Kapabilitas:</p>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <li
-                      v-for="feature in product.features"
-                      :key="feature"
-                      class="flex items-start text-sm text-muted-foreground"
+                    v-for="feature in product.features"
+                    :key="feature"
+                    class="flex items-start text-sm text-muted-foreground/90 font-medium"
                   >
-                      <Check class="size-4 text-emerald-500 mr-2 mt-1" />
-                      {{ feature }}
+                    <Check class="size-4 text-primary mr-2.5 mt-0.5 shrink-0" />
+                    <span class="line-clamp-2 leading-tight">{{ feature }}</span>
                   </li>
-              </ul>
+                </ul>
               </div>
             </CardContent>
           </div>
 
-          <CardFooter class="flex flex-col items-stretch gap-4 pt-6 mt-auto border-t border-border/60 bg-muted/20 dark:bg-muted/5 rounded-b-xl">
-            <Button class="w-full font-semibold shadow-sm" variant="default">
-              Lihat Produk
+          <!-- Conversion Bottom Trigger Matrix Row -->
+          <CardFooter class="grid grid-cols-1 gap-3 pt-4 pb-6 px-6 mt-auto border-t border-border/40 bg-muted/10 dark:bg-muted/5">
+            <Button class="w-full font-medium tracking-wide rounded-xl shadow-sm group/btn" variant="default">
+              <span class="inline-flex items-center gap-1">
+                Eksplorasi
+                <ArrowUpRight class="size-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              </span>
             </Button>
           </CardFooter>
         </Card>

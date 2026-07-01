@@ -20,10 +20,6 @@ RedirectController.definition = {
 * @route '/settings'
 */
 RedirectController.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return RedirectController.definition.url + queryParams(options)
 }
 
@@ -203,7 +199,5 @@ RedirectControllerForm.options = (options?: RouteQueryOptions): RouteFormDefinit
 })
 
 RedirectController.form = RedirectControllerForm
-
-
 
 export default RedirectController

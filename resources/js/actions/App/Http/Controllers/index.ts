@@ -4,7 +4,6 @@ import ArticleController from './ArticleController'
 import ServiceController from './ServiceController'
 import Settings from './Settings'
 
-
 const Controllers = {
     DashboardController: Object.assign(DashboardController, DashboardController),
     ProductController: Object.assign(ProductController, ProductController),

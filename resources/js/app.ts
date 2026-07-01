@@ -7,31 +7,45 @@ import 'aos/dist/aos.css';
 import MainLayout from '@/pages/MainLayout.vue';
 
 createInertiaApp({
-    resolve: async (name) => {
-        const page = await resolvePageComponent(
-            `./Pages/${name}.vue`,
-            import.meta.glob<DefineComponent>('./Pages/**/*.vue')
-        );
+  // PAKAI INI KALAU OS-mu WINDOWS
+  // resolve: async (name) => {
+  //   const page = await resolvePageComponent(
+  //     `./Pages/${name}.vue`,
+  //     import.meta.glob<DefineComponent>('./Pages/**/*.vue')
+  //   );
+  //
+  //   if (page.default.layout === undefined) {
+  //     page.default.layout = MainLayout;
+  //   }
+  //
+  //   return page;
+  // },
 
-        if (page.default.layout === undefined) {
-            page.default.layout = MainLayout;
-        }
+  resolve: async (name) => {
+    const page = await resolvePageComponent(
+      `./pages/${name}.vue`,
+      import.meta.glob<DefineComponent>('./pages/**/*.vue')
+    );
 
-        return page;
-    },
-    setup({ el, App, props, plugin }) {
-        const pinia = createPinia();
+    if (page.default.layout === undefined) {
+      page.default.layout = MainLayout;
+    }
 
-        AOS.init();
+    return page;
+  },
+  setup({ el, App, props, plugin }) {
+    const pinia = createPinia();
 
-        const app = createSSRApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(pinia);
+    AOS.init();
 
-        if (typeof window !== 'undefined') {
-            app.mount(el);
-        }
+    const app = createSSRApp({ render: () => h(App, props) })
+      .use(plugin)
+      .use(pinia);
 
-        return app;
-    },
+    if (typeof window !== 'undefined') {
+      app.mount(el);
+    }
+
+    return app;
+  },
 });

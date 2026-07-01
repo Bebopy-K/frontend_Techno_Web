@@ -20,10 +20,6 @@ store.definition = {
 * @route '/articles'
 */
 store.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return store.definition.url + queryParams(options)
 }
 
@@ -95,7 +91,6 @@ destroy.url = (args: { article: number | { id: number } } | [article: number | {
     }
 
     args = applyUrlDefaults(args)
-
 
     const parsedArgs = {
         article: typeof args.article === 'object'

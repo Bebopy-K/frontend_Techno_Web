@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com');
+/* Importing Plus Jakarta Sans - Clean, premium, authoritative monolithic corporate aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 @import "tailwindcss";
 
@@ -23,7 +24,8 @@
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-ring: hsl(var(--ring));
   --radius-md: var(--radius);
-   --font-sans: "Inter", sans-serif;
+  
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
@@ -31,58 +33,64 @@ html {
 }
 
 :root {
-  --background: 200 33% 96%;          /* Mapped from --background (Soft slate blue) */
-  --foreground: 204 29% 3%;           /* Mapped from --text (Deep abyssal navy) */
+  /* Diubah ke super-bright premium white (Light Mode yang jauh lebih cerah & bersih) */
+  --background: 210 40% 98%;          
+  --foreground: 204 45% 8%;            
 
-  --muted: 203 58% 90%;               /* Lighter variant of --secondary for subtle card/bg tabs */
-  --muted-foreground: 204 29% 35%;    /* Readable subtext based on the deep text color */
+  /* Muted & borders disesuaikan menjadi super crisp, tidak kusam */
+  --muted: 210 40% 93%;                
+  --muted-foreground: 204 20% 40%;    
 
-  --popover: 200 33% 96%;             /* Matches --background */
-  --popover-foreground: 204 29% 3%;   /* Matches --text */
+  /* Kartu menggunakan warna putih murni agar pop-out di atas background */
+  --popover: 0 0% 100%;              
+  --popover-foreground: 204 45% 8%;   
 
-  --card: 200 33% 96%;                /* Matches --background */
-  --card-foreground: 204 29% 3%;      /* Matches --text */
+  --card: 0 0% 100%;                
+  --card-foreground: 204 45% 8%;      
 
-  --border: 203 58% 85%;              /* Light layout lines generated from --secondary */
-  --input: 203 58% 85%;               /* Matches --border */
+  /* Border dibuat tipis dan sangat bersih */
+  --border: 210 30% 88%;              
+  --input: 210 30% 88%;               
 
-  --primary: 202 47% 52%;             /* Mapped from --primary (Ocean blue) */
-  --primary-foreground: 200 33% 96%;  /* High-contrast bright background for text over primary elements */
+  /* Mengangkat saturasi warna utama agar lebih vivid/menyala di background terang */
+  --primary: 201 85% 48%;             
+  --primary-foreground: 0 0% 100%;  
 
-  --secondary: 203 58% 71%;           /* Mapped from --secondary (Muted sky blue) */
-  --secondary-foreground: 204 29% 3%; /* Matches --text */
+  --secondary: 201 30% 75%;           
+  --secondary-foreground: 204 45% 8%; 
 
-  --accent: 203 68% 62%;              /* Mapped from --accent (Vibrant ice blue) */
-  --accent-foreground: 200 33% 96%;   /* Uses high-contrast background color for contrast */
+  --accent: 196 90% 45%;              
+  --accent-foreground: 0 0% 100%;   
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  --ring: 202 47% 52%;                /* Focus rings match primary core color */
+  --ring: 201 85% 48%;                
 
-  --radius: 0.5rem;
+  --radius: 0.75rem; 
 }
 
 .dark {
-  --background: 204 29% 3%;           /* Inverted: deep navy text becomes the backdrop */
-  --foreground: 200 33% 96%;          /* Inverted: light blue background becomes primary text */
+  /* Mempertahankan kedalaman absolut mode gelap PS2 Bios yang eksklusif */
+  --background: 204 29% 3%;            
+  --foreground: 200 33% 96%;          
 
-  --muted: 204 25% 12%;               /* Darker overlay variant for cards and structural blocks */
-  --muted-foreground: 203 58% 71%;    /* Sky blue secondary colors serving as crisp secondary text */
+  --muted: 204 25% 12%;                
+  --muted-foreground: 203 58% 71%;    
 
-  --popover: 204 29% 3%;              /* Matches dark --background */
-  --popover-foreground: 200 33% 96%;  /* Matches dark --text */
+  --popover: 204 29% 3%;              
+  --popover-foreground: 200 33% 96%;  
 
-  --card: 204 29% 3%;                 /* Matches dark --background */
-  --card-foreground: 200 33% 96%;     /* Matches dark --text */
+  --card: 204 29% 3%;                 
+  --card-foreground: 200 33% 96%;     
 
-  --border: 204 20% 16%;              /* Soft, low-contrast border lines for dark theme grid layout */
+  --border: 204 20% 16%;              
   --input: 204 20% 16%;
 
   --primary: 202 55% 56%;             
   --primary-foreground: 204 29% 3%;  
 
-  --secondary: 203 40% 30%;           
+  --secondary: 203 40% 30%;            
   --secondary-foreground: 200 33% 96%;
 
   --accent: 203 68% 62%;              
@@ -95,10 +103,23 @@ html {
 }
 
 * {
+  * { cursor: inherit; }
   @apply border-border;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  @apply bg-background text-foreground;
+  font-family: var(--font-sans);
+  @apply bg-background text-foreground antialiased tracking-tight;
+}
+
+/* Monolithic Architectural Headings */
+h1, h2, h3, h4 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  @apply text-balance leading-tight text-foreground;
+}
+
+/* Clean, crisp styling for copy paragraphs */
+p {
+  letter-spacing: -0.01em;
 }

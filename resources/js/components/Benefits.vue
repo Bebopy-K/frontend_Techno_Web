@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 import {
   Sparkle,
   Tag,
@@ -14,44 +13,41 @@ interface BenefitsProps {
   icon: string;
   title: string;
   description: string;
+  featured?: boolean; // Menentukan kartu mana yang mengambil space lebih besar
 }
 
 const benefitList: BenefitsProps[] = [
   {
     icon: "blocks",
-    title: "Membangun Kepercayaan Brand",
+    title: "Membangun Kredibilitas & Kepercayaan Brand",
     description:
-      "Luncurkan aplikasi yang andal dan sangat aman. Proses pengembangan kami yang mendetail serta tim yang tepercaya memastikan kehadiran digital Anda mencerminkan profesionalisme dan keamanan tinggi sejak hari pertama.",
+      "Kami merancang arsitektur aplikasi dengan standar enkripsi tinggi dan reliabilitas enterprise. Proses pengembangan yang transparan memastikan aset digital Anda mencerminkan profesionalisme mutakhir serta jaminan keamanan tingkat tinggi sejak hari pertama rilis.",
+    featured: true, 
   },
   {
     icon: "lineChart",
-    title: "Menghasilkan Lebih Banyak Prospek",
+    title: "Skalabilitas Prospek & Akuisisi Market",
     description:
-      "Dengan layanan serba ada (all-in-one) kami yang komprehensif, kami tidak hanya menulis kode—kami membangun solusi web yang cepat dan teroptimasi penuh untuk memikat audiens target Anda dan mendongkrak trafik bisnis Anda.",
+      "Kami tidak sekadar menulis kode baris demi baris. Melalui optimalisasi performa performant web, indexing struktur SEO, serta kecepatan load data yang ekstrem, ekosistem digital kami dikonstruksi secara taktis untuk mendongkrak konversi organik bisnis Anda.",
+    featured: false,
   },
   {
     icon: "wallet",
-    title: "Konversi yang Lebih Tinggi",
+    title: "Optimalisasi Efisiensi Biaya & ROI Maksimal",
     description:
-      "Ubah pengunjung biasa menjadi pelanggan setia. Perpaduan antara biaya pengembangan yang ramah di kantong dan penyempurnaan yang berorientasi pada konsumen menjamin pengalaman UI/UX yang mulus demi menghasilkan ROI maksimal.",
+      "Ubah impresi kunjungan kasual menjadi retensi klien setia. Melalui integrasi rancangan UI/UX yang intuitif serta kalkulasi arsitektur cloud server yang hemat resource, kami mengamankan fungsionalitas bisnis terbaik demi melipatgandakan Return on Investment Anda.",
+    featured: false,
   },
   {
     icon: "sparkle",
-    title: "Uji Ide Pemasaran secara Cepat",
+    title: "Time-to-Market Agil Tanpa Hambatan",
     description:
-      "Bergerak cepat dan lampaui kompetitor Anda. Model startup kami yang agil dan bebas birokrasi memungkinkan Anda meluncurkan MVP dengan cepat, mengeksplorasi fitur-fitur baru, dan beradaptasi tanpa hambatan administratif.",
+      "Eksekusi ide pemasaran Anda secara instan sebelum didahului oleh kompetitor. Menggunakan siklus pengembangan agile berpola modern, kami memangkas kompleksitas administratif reguler untuk membantu Anda meluncurkan MVP (Minimum Viable Product) secara adaptif dan presisi.",
+    featured: true,
   },
 ];
 
-const iconMap: Record<
-  string,
-  | typeof Sparkle
-  | typeof Tag
-  | typeof Paintbrush
-  | typeof Blocks
-  | typeof LineChart
-  | typeof Wallet
-> = {
+const iconMap: Record<string, any> = {
   sparkle: Sparkle,
   tag: Tag,
   paintbrush: Paintbrush,
@@ -64,46 +60,69 @@ const iconMap: Record<
 <template>
   <section
     id="benefits"
-    class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
-    data-aos="fade-up" data-aos-duration="1000"
+    class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6 relative"
+    data-aos="fade-up" 
+    data-aos-duration="1000"
   >
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-12">
-      <div class="space-y-2 text-left">
-        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Keuntungan</p>
+    <!-- Header Strategi Bisnis -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-16 border-b border-border/60">
+      <div class="space-y-3 text-left">
+        <div class="inline-flex items-center gap-2 px-1 py-1 text-primary text-xs font-semibold uppercase tracking-wider w-fit">
+          Dampak Strategis
+        </div>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-          Keuntungan memilih kami
+          Keuntungan Akselerasi Bersama Kami
         </h2>
       </div>
-      <p class="text-muted-foreground max-w-md text-sm sm:text-base">
-        Akselerasi pertumbuhan bisnis Anda dengan keuntungan strategis yang dirancang untuk efisiensi tinggi dan hasil maksimal.
+      <p class="text-muted-foreground max-w-md text-sm sm:text-base leading-relaxed">
+        Amankan keunggulan kompetitif industri lewat integrasi sistem yang dirancang khusus demi efisiensi operasional mutakhir.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full">
+    <!-- Premium Bento Grid Architecture Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full items-stretch">
       <Card
-        v-for="({ icon, title, description }, index) in benefitList"
+        v-for="({ icon, title, description, featured }, index) in benefitList"
         :key="title"
-        class="bg-muted/40 dark:bg-card/50 hover:bg-background dark:hover:bg-background transition-all duration-200 group/number border border-border/60 hover:border-primary/30 rounded-xl shadow-sm"
+        :class="[
+          'bg-card/40 dark:bg-card/20 backdrop-blur-sm hover:bg-card dark:hover:bg-muted/10 transition-all duration-300 group/benefit border border-border/40 hover:border-primary/30 rounded-2xl shadow-sm flex flex-col justify-between overflow-hidden relative',
+          featured ? 'md:col-span-2' : 'md:col-span-1'
+        ]"
       >
-        <CardHeader class="pt-6 pb-2">
-          <div class="flex justify-between items-start">
-            <div class="p-2.5 bg-primary/10 rounded-xl text-primary group-hover/number:bg-primary group-hover/number:text-primary-foreground transition-all duration-200 mb-4">
+        <!-- Subtle Structural Grid Numbering Background -->
+        <span class="absolute top-4 right-6 text-3xl font-mono font-extrabold text-muted-foreground/5 dark:text-muted-foreground/[0.03] group-hover/benefit:text-primary/10 select-none pointer-events-none transition-colors duration-300">
+          {{ String(index + 1).padStart(2, '0') }}
+        </span>
+
+        <div>
+          <CardHeader class="pt-6 pb-3 px-6 text-left">
+            <!-- Icon Wrapper Container -->
+            <div class="p-2.5 bg-primary/[0.06] border border-primary/10 rounded-xl text-primary group-hover/benefit:bg-primary group-hover/benefit:text-primary-foreground transition-all duration-300 mb-4 w-fit">
               <component
-                class="size-5"
+                class="size-5 transition-transform duration-300 group-hover/benefit:scale-105"
                 :is="iconMap[icon]"
               />
             </div>
-          </div>
 
-          <CardTitle class="text-lg font-bold text-foreground group-hover/number:text-primary transition-colors duration-200 text-left">
-            {{ title }}
-          </CardTitle>
-        </CardHeader>
+            <!-- Title Content -->
+            <CardTitle class="text-lg sm:text-xl font-bold text-foreground tracking-tight group-hover/benefit:text-primary transition-colors duration-200">
+              {{ title }}
+            </CardTitle>
+          </CardHeader>
 
-        <CardContent class="text-muted-foreground text-left text-sm leading-relaxed pb-6">
-          {{ description }}
-        </CardContent>
+          <!-- Description Text Layout -->
+          <CardContent :class="[
+            'text-muted-foreground text-left text-sm leading-relaxed pb-6 px-6',
+            featured ? 'max-w-3xl' : 'max-w-full'
+          ]">
+            {{ description }}
+          </CardContent>
+        </div>
       </Card>
     </div>
   </section>
 </template>
+
+<style scoped>
+/* Bento layouts are purely dynamic handled via tailwind utility engine layers */
+</style>

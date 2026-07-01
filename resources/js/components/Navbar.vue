@@ -1,123 +1,87 @@
 <script lang="ts" setup>
-import { ref } from "vue";
-
+import { ref, computed } from "vue";
 import { useColorMode } from "@vueuse/core";
-const mode = useColorMode();
 
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
   SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import { ChevronsDown, Menu } from "lucide-vue-next";
+import { Menu } from "lucide-vue-next";
 import ToggleTheme from "./ToggleTheme.vue";
+
+// 1. Import aset secara eksplisit agar dikenali dan di-compile oleh Vite di Laravel
+import iconLight from "@/assets/icon_dark.svg"; // Aset gelap untuk latar terang (Light Mode)
+import iconDark from "@/assets/icon.svg";       // Aset terang untuk latar gelap (Dark Mode)
 
 interface RouteProps {
   href: string;
   label: string;
 }
 
-interface FeatureProps {
-  title: string;
-  description: string;
-}
+const mode = useColorMode();
 
 const routeList: RouteProps[] = [
-  {
-    href: "#products",
-    label: "PRODUK",
-  },
-  {
-    href: "#services",
-    label: "SERVIS",
-  },
-  {
-    href: "#news",
-    label: "ARTIKEL",
-  },
-  {
-    href: "#team",
-    label: "TIM",
-  },
-  {
-    href: "#contact",
-    label: "KONTAK",
-  },
-];
-
-const featureList: FeatureProps[] = [
-  {
-    title: "Showcase Your Value ",
-    description: "Highlight how your product solves user problems.",
-  },
-  {
-    title: "Build Trust",
-    description:
-      "Leverages social proof elements to establish trust and credibility.",
-  },
-  {
-    title: "Capture Leads",
-    description:
-      "Make your lead capture form visually appealing and strategically.",
-  },
+  { href: "#products", label: "Produk" },
+  { href: "#services", label: "Layanan" },
+  { href: "#news", label: "Artikel" },
+  { href: "#team", label: "Tim Kami" },
+  { href: "#contact", label: "Kontak" },
 ];
 
 const isOpen = ref<boolean>(false);
+
+// 2. Menggunakan Computed Property untuk menangani penukaran resolusi file secara reaktif
+const logoSrc = computed(() => {
+  return mode.value === "dark" ? iconDark : iconLight;
+});
 </script>
 
 <template>
-  <header
-    :class="{
-      'shadow-light': mode === 'light',
-      'shadow-dark': mode === 'dark',
-      'w-full top-0 left-0 sticky z-40 flex justify-between items-center px-4 md:px-8 py-3 bg-background/60 backdrop-blur-md border-b border-border/40': true,
-    }"
-  >
-    <div class="flex items-center">
-      <a href="/" class="flex items-center gap-2">
-        <img 
-          src="../assets/icon.svg" 
-          alt="Logo" 
-          class="size-12 object-contain invert dark:invert-0 light:invert transition-all duration-200" 
-        />
-      </a>
-    </div>
-    <div class="flex items-center lg:hidden">
-      <Sheet v-model:open="isOpen">
-        <SheetTrigger as-child>
-          <Menu
-            @click="isOpen = true"
-            class="cursor-pointer"
+  <div class="fixed top-4 inset-x-0 z-50 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
+    <header
+      class="w-full flex justify-between items-center px-4 md:px-6 py-2.5 pointer-events-auto transition-all duration-300 shadow-sm border border-border/50 bg-background/80 backdrop-blur-md text-foreground rounded-2xl"
+    >
+      <div class="flex items-center">
+        <a href="/" class="flex items-center gap-2">
+          <img 
+            :src="logoSrc" 
+            alt="Logo"
+            class="h-8 w-auto object-contain transition-all duration-300"
           />
-        </SheetTrigger>
+        </a>
+      </div>
 
-        <SheetContent
-          side="left"
-          class="flex flex-col justify-between bg-card"
-        >
-          <div>
-            <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-2 lg:hidden">
+        <Sheet v-model:open="isOpen">
+          <SheetTrigger as-child>
+            <Button variant="ghost" size="icon" class="size-9 rounded-xl hover:bg-muted/80">
+              <Menu class="size-5 cursor-pointer" />
+            </Button>
+          </SheetTrigger>
+
+          <SheetContent
+            side="left"
+            class="flex flex-col justify-between bg-card/95 backdrop-blur-md border-r border-border/40 w-[280px]"
+          >
+            <div class="flex flex-col gap-1.5 pt-6">
               <Button
                 v-for="{ href, label } in routeList"
                 :key="label"
                 as-child
                 variant="ghost"
-                class="justify-start text-base"
+                class="justify-start text-sm font-medium rounded-xl h-10 px-4"
               >
                 <a
                   @click="isOpen = false"
@@ -127,77 +91,42 @@ const isOpen = ref<boolean>(false);
                 </a>
               </Button>
             </div>
-          </div>
 
-          <SheetFooter class="flex-col sm:flex-col justify-start items-start">
-            <Separator class="mb-2" />
-            <ToggleTheme />
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
-    </div>
+            <SheetFooter class="flex flex-col justify-start items-stretch gap-4 pb-4">
+              <Separator class="bg-border/60" />
+              <ToggleTheme />
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+      </div>
 
-    <NavigationMenu class="hidden lg:block">
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <!-- <NavigationMenuTrigger class="bg-transparent text-base data-[state=open]:bg-muted/50"> -->
-          <!--   Dropdown -->
-          <!-- </NavigationMenuTrigger> -->
-          <NavigationMenuContent>
-            <div class="grid w-[600px] grid-cols-2 gap-5 p-4">
-              <img
-                src="https://www.radix-vue.com/logo.svg"
-                alt="Features Preview"
-                class="h-full w-full rounded-md object-cover"
-              />
-              <ul class="flex flex-col gap-2">
-                <li
-                  v-for="{ title, description } in featureList"
-                  :key="title"
-                  class="rounded-md p-3 text-sm hover:bg-muted"
+      <div class="hidden lg:flex items-center gap-4">
+        <NavigationMenu>
+          <NavigationMenuList class="gap-1">
+            <NavigationMenuItem v-for="{ href, label } in routeList" :key="label">
+              <NavigationMenuLink asChild>
+                <Button
+                  variant="ghost"
+                  class="text-sm font-medium h-9 px-4 rounded-xl transition-colors hover:bg-muted/80 text-muted-foreground hover:text-foreground"
+                  as-child
                 >
-                  <p class="mb-1 font-semibold leading-none text-foreground">
-                    {{ title }}
-                  </p>
-                  <p class="line-clamp-2 text-muted-foreground">
-                    {{ description }}
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem v-for="{ href, label } in routeList" :key="label">
-          <NavigationMenuLink asChild>
-            <Button
-              variant="ghost"
-              class="text-base"
-              as-child
-            >
-              <a :href="href">
-                {{ label }}
-              </a>
-            </Button>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
-
-    <div class="hidden lg:flex">
-      <ToggleTheme />
-    </div>
-  </header>
+                  <a :href="href">
+                    {{ label }}
+                  </a>
+                </Button>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        
+        <div class="h-4 w-[1px] bg-border/60" />
+        
+        <ToggleTheme />
+      </div>
+    </header>
+  </div>
 </template>
 
 <style scoped>
-.shadow-light {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-}
-
-.shadow-dark {
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-}
+/* State handling completely clean and driven by modern utility classes */
 </style>
-
-
