@@ -13,7 +13,7 @@ interface Article {
     user: {
         name: string;
     };
-    services: {
+    service: {
         name: string;
     };
     comments: {
@@ -92,10 +92,10 @@ const articleList = computed(() => props.articles.slice(1));
                         <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
 
                             <span
-                                v-if="featuredArticle.services"
+                                v-if="featuredArticle.service"
                                 class="px-2.5 py-0.5 font-bold bg-primary/10 text-primary rounded-md uppercase tracking-wider text-[10px]"
                             >
-                                {{ featuredArticle.services.name }}
+                                {{ featuredArticle.service.name }}
                             </span>
 
                             <span class="text-muted-foreground flex items-center gap-1 font-medium">
