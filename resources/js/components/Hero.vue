@@ -107,9 +107,9 @@ const shortcutList: ShortcutProps[] = [
 <style scoped>
 .ps2-grid-matrix {
   background-image: 
-    linear-gradient(to right, hsl(var(--foreground) / 0.15) 3px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--foreground) / 0.15) 3px, transparent 1px);
-  background-size: 5rem 5rem;
+    linear-gradient(to right, hsl(var(--foreground) / 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--foreground) / 0.15) 1px, transparent 1px);
+  background-size: 1rem 1rem;
   mask-image: radial-gradient(circle at 50% 40%, #000 20%, transparent 80%);
 }
 

@@ -18,10 +18,6 @@ index.definition = {
 * @route '/news'
 */
 index.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return index.definition.url + queryParams(options)
 }
 
@@ -112,7 +108,6 @@ detail.url = (args: { article: number | { id: number } } | [article: number | { 
 
     args = applyUrlDefaults(args)
 
-
     const parsedArgs = {
         article: typeof args.article === 'object'
         ? args.article.id
@@ -178,7 +173,7 @@ detail.form = detailForm
 
 const news = {
     index: Object.assign(index, index),
-detail: Object.assign(detail, detail),
+    detail: Object.assign(detail, detail),
 }
 
 export default news

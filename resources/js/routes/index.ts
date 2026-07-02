@@ -20,10 +20,6 @@ login.definition = {
 * @route '/login'
 */
 login.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return login.definition.url + queryParams(options)
 }
 
@@ -105,10 +101,6 @@ logout.definition = {
 * @route '/logout'
 */
 logout.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return logout.definition.url + queryParams(options)
 }
 
@@ -165,10 +157,6 @@ register.definition = {
 * @route '/register'
 */
 register.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return register.definition.url + queryParams(options)
 }
 
@@ -250,10 +238,6 @@ dashboard.definition = {
 * @route '/dashboard'
 */
 dashboard.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return dashboard.definition.url + queryParams(options)
 }
 
@@ -333,10 +317,6 @@ product.definition = {
 * @route '/products'
 */
 product.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return product.definition.url + queryParams(options)
 }
 
@@ -411,10 +391,6 @@ product.definition = {
 * @route '/services'
 */
 product.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return product.definition.url + queryParams(options)
 }
 
