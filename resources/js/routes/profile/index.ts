@@ -20,6 +20,10 @@ edit.definition = {
 * @route '/settings/profile'
 */
 edit.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return edit.definition.url + queryParams(options)
 }
 
@@ -101,6 +105,10 @@ update.definition = {
 * @route '/settings/profile'
 */
 update.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return update.definition.url + queryParams(options)
 }
 
@@ -167,6 +175,10 @@ destroy.definition = {
 * @route '/settings/profile'
 */
 destroy.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return destroy.definition.url + queryParams(options)
 }
 
@@ -214,8 +226,8 @@ destroy.form = destroyForm
 
 const profile = {
     edit: Object.assign(edit, edit),
-    update: Object.assign(update, update),
-    destroy: Object.assign(destroy, destroy),
+update: Object.assign(update, update),
+destroy: Object.assign(destroy, destroy),
 }
 
 export default profile

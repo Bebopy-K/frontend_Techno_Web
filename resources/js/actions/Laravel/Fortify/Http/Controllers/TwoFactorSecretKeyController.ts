@@ -20,6 +20,10 @@ show.definition = {
 * @route '/user/two-factor-secret-key'
 */
 show.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return show.definition.url + queryParams(options)
 }
 

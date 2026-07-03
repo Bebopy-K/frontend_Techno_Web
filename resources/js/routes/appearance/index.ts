@@ -20,6 +20,10 @@ edit.definition = {
 * @route '/settings/appearance'
 */
 edit.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return edit.definition.url + queryParams(options)
 }
 

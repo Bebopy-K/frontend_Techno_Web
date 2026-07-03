@@ -22,6 +22,7 @@ upload.url = (args: { path: string | number } | [path: string | number ] | strin
         args = { path: args }
     }
 
+
     if (Array.isArray(args)) {
         args = {
             path: args[0],
@@ -29,6 +30,7 @@ upload.url = (args: { path: string | number } | [path: string | number ] | strin
     }
 
     args = applyUrlDefaults(args)
+
 
     const parsedArgs = {
         path: args.path,

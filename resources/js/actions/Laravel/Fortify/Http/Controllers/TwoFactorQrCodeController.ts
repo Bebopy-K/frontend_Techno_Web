@@ -20,6 +20,10 @@ show.definition = {
 * @route '/user/two-factor-qr-code'
 */
 show.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return show.definition.url + queryParams(options)
 }
 

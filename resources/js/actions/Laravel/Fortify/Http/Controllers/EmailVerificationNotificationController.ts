@@ -20,6 +20,10 @@ store.definition = {
 * @route '/email/verification-notification'
 */
 store.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return store.definition.url + queryParams(options)
 }
 

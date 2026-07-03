@@ -20,6 +20,10 @@ store.definition = {
 * @route '/user/confirm-password'
 */
 store.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return store.definition.url + queryParams(options)
 }
 

@@ -15,6 +15,14 @@ use App\Models\Article;
 //     });
 // });
 
+// Hapus saja nanti ini Hafiz, saya cuman mau lihat tampilannya
+Route::get('/admin', function () {
+    return Inertia::render('admin/adminDashboard', [
+        'articles' => Article::latest()->get(),
+        'products' => Product::latest()->get(),
+    ]); 
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
@@ -35,8 +43,6 @@ Route::middleware('auth')->group(function () {
 Route::post('/services', [ServiceController::class, 'store']);
 Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
 // Route::inertia('/', 'App')->name('home');
-
-
 
 Route::get('/', function () {
     return Inertia::render('App', [

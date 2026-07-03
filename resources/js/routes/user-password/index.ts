@@ -20,6 +20,10 @@ update.definition = {
 * @route '/settings/password'
 */
 update.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return update.definition.url + queryParams(options)
 }
 

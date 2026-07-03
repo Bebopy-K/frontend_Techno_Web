@@ -20,6 +20,10 @@ loginOptions.definition = {
 * @route '/passkeys/login/options'
 */
 loginOptions.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return loginOptions.definition.url + queryParams(options)
 }
 
@@ -101,6 +105,10 @@ login.definition = {
 * @route '/passkeys/login'
 */
 login.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return login.definition.url + queryParams(options)
 }
 
@@ -157,6 +165,10 @@ confirmOptions.definition = {
 * @route '/passkeys/confirm/options'
 */
 confirmOptions.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return confirmOptions.definition.url + queryParams(options)
 }
 
@@ -238,6 +250,10 @@ confirm.definition = {
 * @route '/passkeys/confirm'
 */
 confirm.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return confirm.definition.url + queryParams(options)
 }
 
@@ -294,6 +310,10 @@ registrationOptions.definition = {
 * @route '/user/passkeys/options'
 */
 registrationOptions.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return registrationOptions.definition.url + queryParams(options)
 }
 
@@ -375,6 +395,10 @@ store.definition = {
 * @route '/user/passkeys'
 */
 store.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return store.definition.url + queryParams(options)
 }
 
@@ -447,6 +471,7 @@ destroy.url = (args: { passkey: number | { id: number } } | [passkey: number | {
 
     args = applyUrlDefaults(args)
 
+
     const parsedArgs = {
         passkey: typeof args.passkey === 'object'
         ? args.passkey.id
@@ -502,12 +527,12 @@ destroy.form = destroyForm
 
 const passkey = {
     loginOptions: Object.assign(loginOptions, loginOptions),
-    login: Object.assign(login, login),
-    confirmOptions: Object.assign(confirmOptions, confirmOptions),
-    confirm: Object.assign(confirm, confirm),
-    registrationOptions: Object.assign(registrationOptions, registrationOptions),
-    store: Object.assign(store, store),
-    destroy: Object.assign(destroy, destroy),
+login: Object.assign(login, login),
+confirmOptions: Object.assign(confirmOptions, confirmOptions),
+confirm: Object.assign(confirm, confirm),
+registrationOptions: Object.assign(registrationOptions, registrationOptions),
+store: Object.assign(store, store),
+destroy: Object.assign(destroy, destroy),
 }
 
 export default passkey

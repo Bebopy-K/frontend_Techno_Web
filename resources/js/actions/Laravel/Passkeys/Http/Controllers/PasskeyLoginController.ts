@@ -20,6 +20,10 @@ index.definition = {
 * @route '/passkeys/login/options'
 */
 index.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return index.definition.url + queryParams(options)
 }
 
@@ -101,6 +105,10 @@ store.definition = {
 * @route '/passkeys/login'
 */
 store.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return store.definition.url + queryParams(options)
 }
 
