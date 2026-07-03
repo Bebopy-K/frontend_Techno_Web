@@ -20,10 +20,6 @@ Controller.definition = {
 * @route '/settings/appearance'
 */
 Controller.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return Controller.definition.url + queryParams(options)
 }
 

@@ -20,10 +20,6 @@ store.definition = {
 * @route '/services'
 */
 store.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return store.definition.url + queryParams(options)
 }
 
@@ -64,7 +60,7 @@ store.form = storeForm
 * @see app/Http/Controllers/ServiceController.php:23
 * @route '/services/{service}'
 */
-export const destroy = (args: { service: number | { id: number } } | [service: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -79,7 +75,7 @@ destroy.definition = {
 * @see app/Http/Controllers/ServiceController.php:23
 * @route '/services/{service}'
 */
-destroy.url = (args: { service: number | { id: number } } | [service: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -95,7 +91,6 @@ destroy.url = (args: { service: number | { id: number } } | [service: number | {
     }
 
     args = applyUrlDefaults(args)
-
 
     const parsedArgs = {
         service: typeof args.service === 'object'
@@ -113,7 +108,7 @@ destroy.url = (args: { service: number | { id: number } } | [service: number | {
 * @see app/Http/Controllers/ServiceController.php:23
 * @route '/services/{service}'
 */
-destroy.delete = (args: { service: number | { id: number } } | [service: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -123,7 +118,7 @@ destroy.delete = (args: { service: number | { id: number } } | [service: number 
 * @see app/Http/Controllers/ServiceController.php:23
 * @route '/services/{service}'
 */
-const destroyForm = (args: { service: number | { id: number } } | [service: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -138,7 +133,7 @@ const destroyForm = (args: { service: number | { id: number } } | [service: numb
 * @see app/Http/Controllers/ServiceController.php:23
 * @route '/services/{service}'
 */
-destroyForm.delete = (args: { service: number | { id: number } } | [service: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

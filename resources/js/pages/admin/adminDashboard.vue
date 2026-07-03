@@ -1,138 +1,220 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, router } from "@inertiajs/vue3"; //[cite: 1] Added router for handling single destructive actions like delete
 import { PlusCircle, Image, FileText, ShoppingBag, X, Loader2, Calendar, Folder, FileEdit, Trash2, ChevronLeft, ChevronRight, ListOrdered } from "lucide-vue-next";
 import ToggleTheme from "@/components/ToggleTheme.vue";
 
-// Define TypeScript interfaces for your data structures
-interface Article {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  image_url: string; 
-  created_at: string;
+// Define TypeScript interfaces for data structures
+interface Article { //[cite: 1]
+  id: number; //[cite: 1]
+  title: string; //[cite: 1]
+  description: string; //[cite: 1]
+  category: string; //[cite: 1]
+  image_url: string;  //[cite: 1]
+  created_at: string; //[cite: 1]
 }
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  image_url: string; 
-  created_at: string;
+interface Product { //[cite: 1]
+  id: number; //[cite: 1]
+  title: string; //[cite: 1]
+  description: string; //[cite: 1]
+  category: string; //[cite: 1]
+  image_url: string;  //[cite: 1]
+  created_at: string; //[cite: 1]
 }
 
-// Accept data passed from your Laravel Controller via Inertia props
-const props = defineProps<{
-  articles: Article[];
-  products: Product[];
+// Accept data passed from Laravel Controller via Inertia props
+const props = defineProps<{ //[cite: 1]
+  articles: Article[]; //[cite: 1]
+  products: Product[]; //[cite: 1]
 }>();
 
-const activeForm = ref<"article" | "product" | null>(null);
-const currentTab = ref<"articles" | "products">("articles");
+const activeForm = ref<"article" | "product" | null>(null); //[cite: 1]
+const currentTab = ref<"articles" | "products">("articles"); //[cite: 1]
+const editingId = ref<number | null>(null);
 
-// Shared Categories configurations for both articles and products
-const categories = ["Announcement", "Tutorial", "Insight", "Case Study"];
-const selectedCategory = ref<string>("All"); 
+// Shared Categories configurations
+const categories = ["Announcement", "Tutorial", "Insight", "Case Study"]; //[cite: 1]
+const selectedCategory = ref<string>("All");  //[cite: 1]
 
 // Pagination States
-const perPageOptions = [5, 10, 20, 50];
-const itemsPerPage = ref(5);
-const articlePage = ref(1);
-const productPage = ref(1);
+const perPageOptions = [5, 10, 20, 50]; //[cite: 1]
+const itemsPerPage = ref(5); //[cite: 1]
+const articlePage = ref(1); //[cite: 1]
+const productPage = ref(1); //[cite: 1]
 
 const articleForm = useForm({
-  title: "",
-  description: "",
-  category: "Announcement",
-  image: null as File | null,
+  _method: "POST",
+  title: "", //[cite: 1]
+  description: "", //[cite: 1]
+  category: "Announcement", //[cite: 1]
+  image: null as File | null, //[cite: 1]
 });
 
 const productForm = useForm({
-  title: "",
-  description: "",
-  category: "Announcement", // Shared starting category
-  image: null as File | null,
+  _method: "POST",
+  title: "", //[cite: 1]
+  description: "", //[cite: 1]
+  category: "Announcement", //[cite: 1]
+  image: null as File | null, //[cite: 1]
 });
 
-const handleArticleFile = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  if (target.files && target.files[0]) {
-    articleForm.image = target.files[0];
+const handleArticleFile = (e: Event) => { //[cite: 1]
+  const target = e.target as HTMLInputElement; //[cite: 1]
+  if (target.files && target.files[0]) { //[cite: 1]
+    articleForm.image = target.files[0]; //[cite: 1]
   }
 };
 
-const handleProductFile = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  if (target.files && target.files[0]) {
-    productForm.image = target.files[0];
+const handleProductFile = (e: Event) => { //[cite: 1]
+  const target = e.target as HTMLInputElement; //[cite: 1]
+  if (target.files && target.files[0]) { //[cite: 1]
+    productForm.image = target.files[0]; //[cite: 1]
   }
 };
 
-const submitArticle = () => {
-  articleForm.post("/admin/articles", {
-    onSuccess: () => {
-      articleForm.reset();
-      activeForm.value = null;
-      articlePage.value = 1;
-    },
-  });
+const openCreateForm = (type: "article" | "product") => {
+  editingId.value = null;
+  activeForm.value = type;
+  if (type === "article") {
+    articleForm.reset();
+    articleForm._method = "POST";
+  } else {
+    productForm.reset();
+    productForm._method = "POST";
+  }
 };
 
-const submitProduct = () => {
-  productForm.post("/admin/products", {
-    onSuccess: () => {
-      productForm.reset();
-      activeForm.value = null;
-      productPage.value = 1;
-    },
-  });
+const openEditArticle = (article: Article) => {
+  editingId.value = article.id;
+  articleForm.clearErrors();
+  articleForm.title = article.title;
+  articleForm.description = article.description;
+  articleForm.category = article.category;
+  articleForm.image = null;
+  articleForm._method = "PUT";
+  activeForm.value = "article";
+};
+
+const openEditProduct = (product: Product) => {
+  editingId.value = product.id;
+  productForm.clearErrors();
+  productForm.title = product.title;
+  productForm.description = product.description;
+  productForm.category = product.category;
+  productForm.image = null;
+  productForm._method = "PUT";
+  activeForm.value = "product";
+};
+
+const submitArticle = () => { //[cite: 1]
+  if (editingId.value) {
+    articleForm.post(`/admin/articles/${editingId.value}`, {
+      onSuccess: () => {
+        articleForm.reset();
+        activeForm.value = null;
+        editingId.value = null;
+      },
+    });
+  } else {
+    articleForm.post("/admin/articles", { //[cite: 1]
+      onSuccess: () => { //[cite: 1]
+        articleForm.reset(); //[cite: 1]
+        activeForm.value = null; //[cite: 1]
+        articlePage.value = 1; //[cite: 1]
+      },
+    });
+  }
+};
+
+const submitProduct = () => { //[cite: 1]
+  if (editingId.value) {
+    productForm.post(`/admin/products/${editingId.value}`, {
+      onSuccess: () => {
+        productForm.reset();
+        activeForm.value = null;
+        editingId.value = null;
+      },
+    });
+  } else {
+    productForm.post("/admin/products", { //[cite: 1]
+      onSuccess: () => { //[cite: 1]
+        productForm.reset(); //[cite: 1]
+        activeForm.value = null; //[cite: 1]
+        productPage.value = 1; //[cite: 1]
+      },
+    });
+  }
+};
+
+// --- Destructive Delete Actions ---
+const deleteArticle = (id: number) => {
+  if (confirm("Are you sure you want to permanently delete this article?")) {
+    router.delete(`/admin/articles/${id}`, {
+      onSuccess: () => {
+        // Safe check to shift pagination backward if deleting the last item on the page
+        if (paginatedArticles.value.length === 1 && articlePage.value > 1) {
+          articlePage.value--;
+        }
+      }
+    });
+  }
+};
+
+const deleteProduct = (id: number) => {
+  if (confirm("Are you sure you want to permanently delete this product?")) {
+    router.delete(`/admin/products/${id}`, {
+      onSuccess: () => {
+        if (paginatedProducts.value.length === 1 && productPage.value > 1) {
+          productPage.value--;
+        }
+      }
+    });
+  }
 };
 
 // --- Articles Logic ---
-const filteredArticles = computed(() => {
-  let items = [...props.articles];
-  if (selectedCategory.value !== "All") {
-    items = items.filter(a => a.category === selectedCategory.value);
+const filteredArticles = computed(() => { //[cite: 1]
+  let items = [...props.articles]; //[cite: 1]
+  if (selectedCategory.value !== "All") { //[cite: 1]
+    items = items.filter(a => a.category === selectedCategory.value); //[cite: 1]
   }
-  return items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  return items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()); //[cite: 1]
 });
 
-const totalArticlePages = computed(() => Math.ceil(filteredArticles.value.length / itemsPerPage.value) || 1);
+const totalArticlePages = computed(() => Math.ceil(filteredArticles.value.length / itemsPerPage.value) || 1); //[cite: 1]
 
-const paginatedArticles = computed(() => {
-  const start = (articlePage.value - 1) * itemsPerPage.value;
-  return filteredArticles.value.slice(start, start + itemsPerPage.value);
+const paginatedArticles = computed(() => { //[cite: 1]
+  const start = (articlePage.value - 1) * itemsPerPage.value; //[cite: 1]
+  return filteredArticles.value.slice(start, start + itemsPerPage.value); //[cite: 1]
 });
 
 // --- Products Logic ---
-const filteredProducts = computed(() => {
-  let items = [...props.products];
-  if (selectedCategory.value !== "All") {
-    items = items.filter(p => p.category === selectedCategory.value);
+const filteredProducts = computed(() => { //[cite: 1]
+  let items = [...props.products]; //[cite: 1]
+  if (selectedCategory.value !== "All") { //[cite: 1]
+    items = items.filter(p => p.category === selectedCategory.value); //[cite: 1]
   }
-  return items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  return items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()); //[cite: 1]
 });
 
-const totalProductPages = computed(() => Math.ceil(filteredProducts.value.length / itemsPerPage.value) || 1);
+const totalProductPages = computed(() => Math.ceil(filteredProducts.value.length / itemsPerPage.value) || 1); //[cite: 1]
 
-const paginatedProducts = computed(() => {
-  const start = (productPage.value - 1) * itemsPerPage.value;
-  return filteredProducts.value.slice(start, start + itemsPerPage.value);
+const paginatedProducts = computed(() => { //[cite: 1]
+  const start = (productPage.value - 1) * itemsPerPage.value; //[cite: 1]
+  return filteredProducts.value.slice(start, start + itemsPerPage.value); //[cite: 1]
 });
 
-// Reset page counts when filters, view limits, or tabs change
-watch([selectedCategory, itemsPerPage, currentTab], () => {
-  productPage.value = 1;
-  articlePage.value = 1;
+watch([selectedCategory, itemsPerPage, currentTab], () => { //[cite: 1]
+  productPage.value = 1; //[cite: 1]
+  articlePage.value = 1; //[cite: 1]
 });
 
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
+const formatDate = (dateString: string) => { //[cite: 1]
+  return new Date(dateString).toLocaleDateString("en-US", { //[cite: 1]
+    month: "short", //[cite: 1]
+    day: "numeric", //[cite: 1]
+    year: "numeric", //[cite: 1]
   });
 };
 </script>
@@ -157,7 +239,7 @@ const formatDate = (dateString: string) => {
         <h2 class="text-xs font-semibold tracking-wider uppercase text-muted-foreground">Quick Actions</h2>
         <div class="flex flex-wrap gap-4">
           <button 
-            @click="activeForm = 'article'"
+            @click="openCreateForm('article')"
             class="flex items-center gap-3 px-5 py-3.5 bg-secondary/50 hover:bg-secondary/80 active:scale-[0.98] border border-border rounded-xl font-medium transition-all shadow-sm"
           >
             <FileText class="size-5 text-primary" />
@@ -166,7 +248,7 @@ const formatDate = (dateString: string) => {
           </button>
 
           <button 
-            @click="activeForm = 'product'"
+            @click="openCreateForm('product')"
             class="flex items-center gap-3 px-5 py-3.5 bg-secondary/50 hover:bg-secondary/80 active:scale-[0.98] border border-border rounded-xl font-medium transition-all shadow-sm"
           >
             <ShoppingBag class="size-5 text-emerald-500" />
@@ -176,7 +258,7 @@ const formatDate = (dateString: string) => {
         </div>
       </section>
 
-      <!-- Control Bar: Toggles, Filters, and Row Limits -->
+      <!-- Control Bar -->
       <section class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pt-4 border-t border-border/40">
         <div class="flex flex-wrap items-center gap-6">
           <div class="space-y-2">
@@ -201,7 +283,6 @@ const formatDate = (dateString: string) => {
             </div>
           </div>
 
-          <!-- Page Size Data Limiter Dropdown -->
           <div class="space-y-2">
             <h2 class="text-xs font-semibold tracking-wider uppercase text-muted-foreground">Rows Per Page</h2>
             <div class="flex items-center gap-2 bg-secondary/40 border border-border/60 rounded-xl px-3 py-1.5 h-[46px] w-fit">
@@ -215,20 +296,12 @@ const formatDate = (dateString: string) => {
           </div>
         </div>
 
-        <!-- Shared Filter Selection Cluster -->
         <div class="space-y-2">
-          <h2 class="text-xs font-semibold tracking-wider uppercase text-muted-foreground">
-            Filter Content by Category
-          </h2>
-          
+          <h2 class="text-xs font-semibold tracking-wider uppercase text-muted-foreground">Filter Content by Category</h2>
           <div class="flex flex-wrap gap-2 bg-secondary/10 p-1.5 border border-border/40 rounded-xl w-fit">
             <span 
               @click="selectedCategory = 'All'"
-              :class="[
-                selectedCategory === 'All' 
-                  ? (currentTab === 'articles' ? 'bg-primary text-primary-foreground font-semibold shadow-sm' : 'bg-emerald-500 text-white font-semibold shadow-sm') 
-                  : 'bg-secondary/60 text-muted-foreground border border-border/40 hover:text-foreground'
-              ]"
+              :class="[selectedCategory === 'All' ? (currentTab === 'articles' ? 'bg-primary text-primary-foreground font-semibold shadow-sm' : 'bg-emerald-500 text-white font-semibold shadow-sm') : 'bg-secondary/60 text-muted-foreground border border-border/40 hover:text-foreground']"
               class="px-4 py-1.5 text-xs rounded-lg cursor-pointer select-none transition-all font-medium"
             >
               All
@@ -237,11 +310,7 @@ const formatDate = (dateString: string) => {
               v-for="cat in categories" 
               :key="cat" 
               @click="selectedCategory = cat"
-              :class="[
-                selectedCategory === cat 
-                  ? (currentTab === 'articles' ? 'bg-primary text-primary-foreground font-semibold shadow-sm' : 'bg-emerald-500 text-white font-semibold shadow-sm') 
-                  : 'bg-secondary/60 text-muted-foreground border border-border/40 hover:border-muted-foreground/40 hover:text-foreground'
-              ]"
+              :class="[selectedCategory === cat ? (currentTab === 'articles' ? 'bg-primary text-primary-foreground font-semibold shadow-sm' : 'bg-emerald-500 text-white font-semibold shadow-sm') : 'bg-secondary/60 text-muted-foreground border border-border/40 hover:border-muted-foreground/40 hover:text-foreground']"
               class="px-4 py-1.5 text-xs font-medium rounded-lg cursor-pointer select-none transition-all"
             >
               {{ cat }}
@@ -300,10 +369,11 @@ const formatDate = (dateString: string) => {
                       </td>
                       <td class="p-4 pr-6 whitespace-nowrap text-right">
                         <div class="flex items-center justify-end gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
-                          <button class="p-1.5 hover:bg-secondary rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Edit Article">
+                          <button @click="openEditArticle(article)" class="p-1.5 hover:bg-secondary rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Edit Article">
                             <FileEdit class="size-4" />
                           </button>
-                          <button class="p-1.5 hover:bg-destructive/10 rounded-lg text-muted-foreground hover:text-destructive transition-colors" title="Delete Article">
+                          <!-- @click event handler hooked up to delete wrapper functions -->
+                          <button @click="deleteArticle(article.id)" class="p-1.5 hover:bg-destructive/10 rounded-lg text-muted-foreground hover:text-destructive transition-colors" title="Delete Article">
                             <Trash2 class="size-4" />
                           </button>
                         </div>
@@ -314,24 +384,16 @@ const formatDate = (dateString: string) => {
               </div>
             </div>
 
-            <!-- Article Pagination UI Elements -->
+            <!-- Pagination Elements -->
             <div class="flex items-center justify-between px-2 py-1">
               <p class="text-xs text-muted-foreground">
                 Showing Page <span class="font-medium text-foreground">{{ articlePage }}</span> of <span class="font-medium text-foreground">{{ totalArticlePages }}</span>
               </p>
               <div class="flex gap-2">
-                <button 
-                  @click="articlePage = Math.max(articlePage - 1, 1)" 
-                  :disabled="articlePage === 1"
-                  class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all"
-                >
+                <button @click="articlePage = Math.max(articlePage - 1, 1)" :disabled="articlePage === 1" class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all">
                   <ChevronLeft class="size-4" />
                 </button>
-                <button 
-                  @click="articlePage = Math.min(articlePage + 1, totalArticlePages)" 
-                  :disabled="articlePage === totalArticlePages"
-                  class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all"
-                >
+                <button @click="articlePage = Math.min(articlePage + 1, totalArticlePages)" :disabled="articlePage === totalArticlePages" class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all">
                   <ChevronRight class="size-4" />
                 </button>
               </div>
@@ -386,10 +448,11 @@ const formatDate = (dateString: string) => {
                       </td>
                       <td class="p-4 pr-6 whitespace-nowrap text-right">
                         <div class="flex items-center justify-end gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
-                          <button class="p-1.5 hover:bg-secondary rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Edit Product">
+                          <button @click="openEditProduct(product)" class="p-1.5 hover:bg-secondary rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Edit Product">
                             <FileEdit class="size-4" />
                           </button>
-                          <button class="p-1.5 hover:bg-destructive/10 rounded-lg text-muted-foreground hover:text-destructive transition-colors" title="Delete Product">
+                          <!-- @click event handler hooked up to delete wrapper functions -->
+                          <button @click="deleteProduct(product.id)" class="p-1.5 hover:bg-destructive/10 rounded-lg text-muted-foreground hover:text-destructive transition-colors" title="Delete Product">
                             <Trash2 class="size-4" />
                           </button>
                         </div>
@@ -400,24 +463,16 @@ const formatDate = (dateString: string) => {
               </div>
             </div>
 
-            <!-- Product Pagination UI Elements -->
+            <!-- Product Pagination -->
             <div class="flex items-center justify-between px-2 py-1">
               <p class="text-xs text-muted-foreground">
                 Showing Page <span class="font-medium text-foreground">{{ productPage }}</span> of <span class="font-medium text-foreground">{{ totalProductPages }}</span>
               </p>
               <div class="flex gap-2">
-                <button 
-                  @click="productPage = Math.max(productPage - 1, 1)" 
-                  :disabled="productPage === 1"
-                  class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all"
-                >
+                <button @click="productPage = Math.max(productPage - 1, 1)" :disabled="productPage === 1" class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all">
                   <ChevronLeft class="size-4" />
                 </button>
-                <button 
-                  @click="productPage = Math.min(productPage + 1, totalProductPages)" 
-                  :disabled="productPage === totalProductPages"
-                  class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all"
-                >
+                <button @click="productPage = Math.min(productPage + 1, totalProductPages)" :disabled="productPage === totalProductPages" class="p-2 border border-border rounded-xl bg-card hover:bg-secondary/80 disabled:opacity-40 disabled:hover:bg-card transition-all">
                   <ChevronRight class="size-4" />
                 </button>
               </div>
@@ -435,10 +490,10 @@ const formatDate = (dateString: string) => {
         <div class="flex justify-between items-center p-6 border-b border-border">
           <h3 class="text-xl font-bold">
             <span v-if="activeForm === 'article'" class="flex items-center gap-2">
-              <FileText class="size-5 text-primary" /> Upload Article
+              <FileText class="size-5 text-primary" /> {{ editingId ? 'Edit Article' : 'Upload Article' }}
             </span>
             <span v-else class="flex items-center gap-2">
-              <ShoppingBag class="size-5 text-emerald-500" /> Upload Product
+              <ShoppingBag class="size-5 text-emerald-500" /> {{ editingId ? 'Edit Product' : 'Upload Product' }}
             </span>
           </h3>
           <button @click="activeForm = null" class="text-muted-foreground hover:text-foreground p-1 transition-colors">
@@ -470,13 +525,13 @@ const formatDate = (dateString: string) => {
           </div>
 
           <div class="space-y-2">
-            <label class="text-sm font-medium text-foreground/80">Upload Image</label>
+            <label class="text-sm font-medium text-foreground/80">Upload Image <span v-if="editingId" class="text-xs text-muted-foreground font-normal">(Optional when editing)</span></label>
             <label class="flex flex-col items-center justify-center border border-dashed border-border hover:border-primary rounded-xl p-6 bg-secondary/10 cursor-pointer group transition-all">
               <Image class="size-7 text-muted-foreground/60 group-hover:text-primary transition-colors mb-2" />
               <span class="text-xs text-muted-foreground group-hover:text-foreground text-center line-clamp-1 max-w-[280px] transition-colors font-medium">
-                {{ articleForm.image ? articleForm.image.name : "Click to select thumbnail image" }}
+                {{ articleForm.image ? articleForm.image.name : (editingId ? "Leave empty to keep existing artwork" : "Click to select thumbnail image") }}
               </span>
-              <input type="file" accept="image/*" required @change="handleArticleFile" class="hidden" />
+              <input type="file" accept="image/*" :required="!editingId" @change="handleArticleFile" class="hidden" />
             </label>
           </div>
 
@@ -484,7 +539,7 @@ const formatDate = (dateString: string) => {
             <button type="button" @click="activeForm = null" class="px-4 py-2.5 bg-secondary text-foreground text-sm font-medium rounded-lg hover:bg-secondary/80 transition-colors">Cancel</button>
             <button type="submit" :disabled="articleForm.processing" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md disabled:opacity-60">
               <Loader2 v-if="articleForm.processing" class="size-4 animate-spin" />
-              <span>{{ articleForm.processing ? 'Uploading...' : 'Publish Article' }}</span>
+              <span>{{ articleForm.processing ? (editingId ? 'Saving...' : 'Uploading...') : (editingId ? 'Update Article' : 'Publish Article') }}</span>
             </button>
           </div>
         </form>
@@ -513,13 +568,13 @@ const formatDate = (dateString: string) => {
           </div>
 
           <div class="space-y-2">
-            <label class="text-sm font-medium text-foreground/80">Upload Image</label>
+            <label class="text-sm font-medium text-foreground/80">Upload Image <span v-if="editingId" class="text-xs text-muted-foreground font-normal">(Optional when editing)</span></label>
             <label class="flex flex-col items-center justify-center border border-dashed border-border hover:border-primary rounded-xl p-6 bg-secondary/10 cursor-pointer group transition-all">
               <Image class="size-7 text-muted-foreground/60 group-hover:text-primary transition-colors mb-2" />
               <span class="text-xs text-muted-foreground group-hover:text-foreground text-center line-clamp-1 max-w-[280px] transition-colors font-medium">
-                {{ productForm.image ? productForm.image.name : "Click to select product graphic" }}
+                {{ productForm.image ? productForm.image.name : (editingId ? "Leave empty to keep existing artwork" : "Click to select product graphic") }}
               </span>
-              <input type="file" accept="image/*" required @change="handleProductFile" class="hidden" />
+              <input type="file" accept="image/*" :required="!editingId" @change="handleProductFile" class="hidden" />
             </label>
           </div>
 
@@ -527,7 +582,7 @@ const formatDate = (dateString: string) => {
             <button type="button" @click="activeForm = null" class="px-4 py-2.5 bg-secondary text-foreground text-sm font-medium rounded-lg hover:bg-secondary/80 transition-colors">Cancel</button>
             <button type="submit" :disabled="productForm.processing" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md disabled:opacity-60">
               <Loader2 v-if="productForm.processing" class="size-4 animate-spin" />
-              <span>{{ productForm.processing ? 'Saving...' : 'Create Product' }}</span>
+              <span>{{ productForm.processing ? (editingId ? 'Saving...' : 'Creating...') : (editingId ? 'Update Product' : 'Create Product') }}</span>
             </button>
           </div>
         </form>

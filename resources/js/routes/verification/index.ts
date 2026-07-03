@@ -20,10 +20,6 @@ notice.definition = {
 * @route '/email/verify'
 */
 notice.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return notice.definition.url + queryParams(options)
 }
 
@@ -105,7 +101,6 @@ verify.definition = {
 * @route '/email/verify/{id}/{hash}'
 */
 verify.url = (args: { id: string | number, hash: string | number } | [id: string | number, hash: string | number ], options?: RouteQueryOptions) => {
-
     if (Array.isArray(args)) {
         args = {
             id: args[0],
@@ -114,7 +109,6 @@ verify.url = (args: { id: string | number, hash: string | number } | [id: string
     }
 
     args = applyUrlDefaults(args)
-
 
     const parsedArgs = {
         id: args.id,
@@ -205,10 +199,6 @@ send.definition = {
 * @route '/email/verification-notification'
 */
 send.url = (options?: RouteQueryOptions) => {
-
-
-
-
     return send.definition.url + queryParams(options)
 }
 
@@ -246,8 +236,8 @@ send.form = sendForm
 
 const verification = {
     notice: Object.assign(notice, notice),
-verify: Object.assign(verify, verify),
-send: Object.assign(send, send),
+    verify: Object.assign(verify, verify),
+    send: Object.assign(send, send),
 }
 
 export default verification
