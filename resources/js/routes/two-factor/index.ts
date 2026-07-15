@@ -21,6 +21,10 @@ login.definition = {
 * @route '/two-factor-challenge'
 */
 login.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return login.definition.url + queryParams(options)
 }
 
@@ -102,6 +106,10 @@ enable.definition = {
 * @route '/user/two-factor-authentication'
 */
 enable.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return enable.definition.url + queryParams(options)
 }
 
@@ -158,6 +166,10 @@ confirm.definition = {
 * @route '/user/confirmed-two-factor-authentication'
 */
 confirm.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return confirm.definition.url + queryParams(options)
 }
 
@@ -214,6 +226,10 @@ disable.definition = {
 * @route '/user/two-factor-authentication'
 */
 disable.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return disable.definition.url + queryParams(options)
 }
 
@@ -280,6 +296,10 @@ qrCode.definition = {
 * @route '/user/two-factor-qr-code'
 */
 qrCode.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return qrCode.definition.url + queryParams(options)
 }
 
@@ -361,6 +381,10 @@ secretKey.definition = {
 * @route '/user/two-factor-secret-key'
 */
 secretKey.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return secretKey.definition.url + queryParams(options)
 }
 
@@ -442,6 +466,10 @@ recoveryCodes.definition = {
 * @route '/user/two-factor-recovery-codes'
 */
 recoveryCodes.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return recoveryCodes.definition.url + queryParams(options)
 }
 
@@ -523,6 +551,10 @@ regenerateRecoveryCodes.definition = {
 * @route '/user/two-factor-recovery-codes'
 */
 regenerateRecoveryCodes.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return regenerateRecoveryCodes.definition.url + queryParams(options)
 }
 
@@ -557,6 +589,8 @@ regenerateRecoveryCodesForm.post = (options?: RouteQueryOptions): RouteFormDefin
 })
 
 regenerateRecoveryCodes.form = regenerateRecoveryCodesForm
+
+
 
 const twoFactor = {
     login: Object.assign(login, loginDf2c2a),

@@ -18,6 +18,10 @@ index.definition = {
 * @route '/news'
 */
 index.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return index.definition.url + queryParams(options)
 }
 
@@ -77,7 +81,7 @@ index.form = indexForm
 * @see routes/web.php:80
 * @route '/news/{article}'
 */
-export const detail = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const detail = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: detail.url(args, options),
     method: 'get',
 })
@@ -91,7 +95,7 @@ detail.definition = {
 * @see routes/web.php:80
 * @route '/news/{article}'
 */
-detail.url = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+detail.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { article: args }
     }
@@ -108,6 +112,7 @@ detail.url = (args: { article: string | number | { id: string | number } } | [ar
 
     args = applyUrlDefaults(args)
 
+
     const parsedArgs = {
         article: typeof args.article === 'object'
         ? args.article.id
@@ -123,7 +128,7 @@ detail.url = (args: { article: string | number | { id: string | number } } | [ar
 * @see routes/web.php:80
 * @route '/news/{article}'
 */
-detail.get = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+detail.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: detail.url(args, options),
     method: 'get',
 })
@@ -132,7 +137,7 @@ detail.get = (args: { article: string | number | { id: string | number } } | [ar
 * @see routes/web.php:80
 * @route '/news/{article}'
 */
-detail.head = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+detail.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: detail.url(args, options),
     method: 'head',
 })
@@ -141,7 +146,7 @@ detail.head = (args: { article: string | number | { id: string | number } } | [a
 * @see routes/web.php:80
 * @route '/news/{article}'
 */
-const detailForm = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const detailForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: detail.url(args, options),
     method: 'get',
 })
@@ -150,7 +155,7 @@ const detailForm = (args: { article: string | number | { id: string | number } }
 * @see routes/web.php:80
 * @route '/news/{article}'
 */
-detailForm.get = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+detailForm.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: detail.url(args, options),
     method: 'get',
 })
@@ -159,7 +164,7 @@ detailForm.get = (args: { article: string | number | { id: string | number } } |
 * @see routes/web.php:80
 * @route '/news/{article}'
 */
-detailForm.head = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+detailForm.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: detail.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -170,6 +175,8 @@ detailForm.head = (args: { article: string | number | { id: string | number } } 
 })
 
 detail.form = detailForm
+
+
 
 const news = {
     index: Object.assign(index, index),

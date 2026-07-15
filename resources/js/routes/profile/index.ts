@@ -20,6 +20,10 @@ edit.definition = {
 * @route '/settings/profile'
 */
 edit.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return edit.definition.url + queryParams(options)
 }
 
@@ -101,6 +105,10 @@ update.definition = {
 * @route '/settings/profile'
 */
 update.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return update.definition.url + queryParams(options)
 }
 
@@ -167,6 +175,10 @@ destroy.definition = {
 * @route '/settings/profile'
 */
 destroy.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return destroy.definition.url + queryParams(options)
 }
 
@@ -211,6 +223,8 @@ destroyForm.delete = (options?: RouteQueryOptions): RouteFormDefinition<'post'> 
 })
 
 destroy.form = destroyForm
+
+
 
 const profile = {
     edit: Object.assign(edit, edit),

@@ -20,6 +20,10 @@ store.definition = {
 * @route '/articles'
 */
 store.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return store.definition.url + queryParams(options)
 }
 
@@ -60,7 +64,7 @@ store.form = storeForm
 * @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
-export const destroy = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -75,7 +79,7 @@ destroy.definition = {
 * @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
-destroy.url = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { article: args }
     }
@@ -91,6 +95,7 @@ destroy.url = (args: { article: string | number | { id: string | number } } | [a
     }
 
     args = applyUrlDefaults(args)
+
 
     const parsedArgs = {
         article: typeof args.article === 'object'
@@ -108,7 +113,7 @@ destroy.url = (args: { article: string | number | { id: string | number } } | [a
 * @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
-destroy.delete = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -118,7 +123,7 @@ destroy.delete = (args: { article: string | number | { id: string | number } } |
 * @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
-const destroyForm = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -133,7 +138,7 @@ const destroyForm = (args: { article: string | number | { id: string | number } 
 * @see app/Http/Controllers/ArticleController.php:31
 * @route '/articles/{article}'
 */
-destroyForm.delete = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
