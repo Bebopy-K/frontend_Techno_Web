@@ -230,92 +230,7 @@ registerForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 register.form = registerForm
 
 /**
-* @see \App\Http\Controllers\DashboardController::dashboard
-* @see app/Http/Controllers/DashboardController.php:12
-* @route '/dashboard'
-*/
-export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: dashboard.url(options),
-    method: 'get',
-})
-
-dashboard.definition = {
-    methods: ["get","head"],
-    url: '/dashboard',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\DashboardController::dashboard
-* @see app/Http/Controllers/DashboardController.php:12
-* @route '/dashboard'
-*/
-dashboard.url = (options?: RouteQueryOptions) => {
-
-
-
-
-    return dashboard.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\DashboardController::dashboard
-* @see app/Http/Controllers/DashboardController.php:12
-* @route '/dashboard'
-*/
-dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: dashboard.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\DashboardController::dashboard
-* @see app/Http/Controllers/DashboardController.php:12
-* @route '/dashboard'
-*/
-dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: dashboard.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\DashboardController::dashboard
-* @see app/Http/Controllers/DashboardController.php:12
-* @route '/dashboard'
-*/
-const dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: dashboard.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\DashboardController::dashboard
-* @see app/Http/Controllers/DashboardController.php:12
-* @route '/dashboard'
-*/
-dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: dashboard.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\DashboardController::dashboard
-* @see app/Http/Controllers/DashboardController.php:12
-* @route '/dashboard'
-*/
-dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: dashboard.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-dashboard.form = dashboardForm
-
-/**
-* @see routes/web.php:63
+* @see routes/web.php:80
 * @route '/products'
 */
 export const product = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -329,7 +244,7 @@ product.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:63
+* @see routes/web.php:80
 * @route '/products'
 */
 product.url = (options?: RouteQueryOptions) => {
@@ -341,7 +256,7 @@ product.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:63
+* @see routes/web.php:80
 * @route '/products'
 */
 product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -350,7 +265,7 @@ product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:63
+* @see routes/web.php:80
 * @route '/products'
 */
 product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -359,7 +274,7 @@ product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:63
+* @see routes/web.php:80
 * @route '/products'
 */
 const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -368,7 +283,7 @@ const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:63
+* @see routes/web.php:80
 * @route '/products'
 */
 productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -377,7 +292,7 @@ productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:63
+* @see routes/web.php:80
 * @route '/products'
 */
 productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -393,7 +308,7 @@ productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 product.form = productForm
 
 /**
-* @see routes/web.php:69
+* @see routes/web.php:86
 * @route '/services'
 */
 export const product = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -407,7 +322,7 @@ product.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:69
+* @see routes/web.php:86
 * @route '/services'
 */
 product.url = (options?: RouteQueryOptions) => {
@@ -419,7 +334,7 @@ product.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:69
+* @see routes/web.php:86
 * @route '/services'
 */
 product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -428,7 +343,7 @@ product.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:69
+* @see routes/web.php:86
 * @route '/services'
 */
 product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -437,7 +352,7 @@ product.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:69
+* @see routes/web.php:86
 * @route '/services'
 */
 const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -446,7 +361,7 @@ const productForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:69
+* @see routes/web.php:86
 * @route '/services'
 */
 productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -455,7 +370,7 @@ productForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:69
+* @see routes/web.php:86
 * @route '/services'
 */
 productForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

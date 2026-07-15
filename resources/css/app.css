@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com');
+/* Importing premium tech interface typography: Clash Display (Geometric Headings), Satoshi (UI Text), and JetBrains Mono (Data Layouts) */
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 @import "tailwindcss";
 
@@ -22,76 +24,73 @@
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-ring: hsl(var(--ring));
+  
   --radius-md: var(--radius);
-   --font-sans: "Inter", sans-serif;
+  --font: "Satoshi", sans-serif;
+  --font-heading: "Clash Display", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-:root {
-  --background: 200 33% 96%;          /* Mapped from --background (Soft slate blue) */
-  --foreground: 204 29% 3%;           /* Mapped from --text (Deep abyssal navy) */
+:root, :root[data-theme="light"] {
+  --background: 210 40% 98%;          /* Ultra-clean glare-free layout background */
+  --foreground: 222 47% 11%;          /* Strong slate carbon for comfortable reading */
 
-  --muted: 203 58% 90%;               /* Lighter variant of --secondary for subtle card/bg tabs */
-  --muted-foreground: 204 29% 35%;    /* Readable subtext based on the deep text color */
+  --primary: 221 83% 53%;             /* Dominant royal blueprint blue */
+  --primary-foreground: 210 40% 98%;
 
-  --popover: 200 33% 96%;             /* Matches --background */
-  --popover-foreground: 204 29% 3%;   /* Matches --text */
+  --secondary: 214 20% 90%;           /* Soft interface canvas modules */
+  --secondary-foreground: 222 47% 11%;
 
-  --card: 200 33% 96%;                /* Matches --background */
-  --card-foreground: 204 29% 3%;      /* Matches --text */
+  --accent: 195 80% 42%;              /* Deep glacial ice indicator accent */
+  --accent-foreground: 210 40% 98%;
 
-  --border: 203 58% 85%;              /* Light layout lines generated from --secondary */
-  --input: 203 58% 85%;               /* Matches --border */
+  --card: 210 40% 98%;
+  --card-foreground: 222 47% 11%;
+  --popover: 210 40% 98%;
+  --popover-foreground: 222 47% 11%;
+  
+  --muted: 214 15% 91%;
+  --muted-foreground: 218 10% 46%;
+  --border: 214 15% 87%;              /* Clean layout separation lines */
+  --input: 214 15% 87%;
+  --ring: 221 83% 53%;
 
-  --primary: 202 47% 52%;             /* Mapped from --primary (Ocean blue) */
-  --primary-foreground: 200 33% 96%;  /* High-contrast bright background for text over primary elements */
+  --destructive: 350 80% 50%;
+  --destructive-foreground: 0 0% 100%;
 
-  --secondary: 203 58% 71%;           /* Mapped from --secondary (Muted sky blue) */
-  --secondary-foreground: 204 29% 3%; /* Matches --text */
-
-  --accent: 203 68% 62%;              /* Mapped from --accent (Vibrant ice blue) */
-  --accent-foreground: 200 33% 96%;   /* Uses high-contrast background color for contrast */
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-
-  --ring: 202 47% 52%;                /* Focus rings match primary core color */
-
-  --radius: 0.5rem;
+  --radius: 0.375rem;
 }
 
-.dark {
-  --background: 204 29% 3%;           /* Inverted: deep navy text becomes the backdrop */
-  --foreground: 200 33% 96%;          /* Inverted: light blue background becomes primary text */
+.dark, :root[data-theme="dark"] {
+  --background: 222 47% 6%;           /* Deeply polished professional slate black layout */
+  --foreground: 210 30% 96%;          /* Soft crisp light silver typography */
 
-  --muted: 204 25% 12%;               /* Darker overlay variant for cards and structural blocks */
-  --muted-foreground: 203 58% 71%;    /* Sky blue secondary colors serving as crisp secondary text */
+  --primary: 217 91% 60%;             /* Refined dashboard blueprint blue */
+  --primary-foreground: 222 47% 6%;
 
-  --popover: 204 29% 3%;              /* Matches dark --background */
-  --popover-foreground: 200 33% 96%;  /* Matches dark --text */
+  --secondary: 222 20% 12%;           /* Low-profile system panel housings */
+  --secondary-foreground: 210 30% 96%;
 
-  --card: 204 29% 3%;                 /* Matches dark --background */
-  --card-foreground: 200 33% 96%;     /* Matches dark --text */
+  --accent: 195 90% 55%;              /* Bio-luminescent neon glacial ice signal */
+  --accent-foreground: 222 47% 6%;
 
-  --border: 204 20% 16%;              /* Soft, low-contrast border lines for dark theme grid layout */
-  --input: 204 20% 16%;
+  --card: 222 20% 9%;
+  --card-foreground: 210 30% 96%;
+  --popover: 222 20% 9%;
+  --popover-foreground: 210 30% 96%;
 
-  --primary: 202 55% 56%;             
-  --primary-foreground: 204 29% 3%;  
+  --muted: 222 15% 15%;
+  --muted-foreground: 215 15% 72%;
+  --border: 222 15% 16%;              /* Clean, subtle wireframe tracking layout lines */
+  --input: 222 15% 16%;
+  --ring: 217 91% 60%;
 
-  --secondary: 203 40% 30%;           
-  --secondary-foreground: 200 33% 96%;
-
-  --accent: 203 68% 62%;              
-  --accent-foreground: 204 29% 3%;  
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-
-  --ring: 202 55% 56%;                
+  --destructive: 350 75% 50%;
+  --destructive-foreground: 0 0% 100%;
 }
 
 * {
@@ -99,6 +98,15 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  @apply bg-background text-foreground;
+  font-family: var(--font);
+  @apply bg-background text-foreground antialiased tracking-normal;
+}
+
+h1, h2, h3, .brand-font {
+  font-family: var(--font-heading);
+  @apply tracking-tight font-semibold; 
+}
+
+code, pre, .tech-stat {
+  font-family: var(--font-mono);
 }

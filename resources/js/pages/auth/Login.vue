@@ -2,9 +2,9 @@
 import { ref, computed } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { Eye, EyeOff, Lock, Mail, Loader2 } from "lucide-vue-next";
+import ToggleTheme from "@/components/ToggleTheme.vue"; 
 
 const showPassword = ref(false);
-
 const form = useForm({
   email: "",
   password: "",
@@ -23,49 +23,26 @@ function submit() {
 </script>
 
 <template>
-  <div class="login-wrapper">
-    <!-- Animated background -->
-    <div class="bg-orb bg-orb-1"></div>
-    <div class="bg-orb bg-orb-2"></div>
-    <div class="bg-orb bg-orb-3"></div>
+  <section class="min-h-screen w-full flex bg-background text-foreground overflow-hidden">
+    
+    <div class="w-full lg:w-[45%] flex flex-col justify-between p-8 sm:p-12 md:p-16 relative z-10 bg-background/80 backdrop-blur-md border-r border-border">
+      
+      <div class="absolute top-4 right-4 z-20 w-auto">
+        <ToggleTheme />
+      </div>
 
-    <!-- Grid pattern overlay -->
-    <div class="grid-overlay"></div>
-
-    <div class="login-container">
-      <!-- Card -->
-      <div class="login-card">
-        <!-- Logo & Branding -->
-        <div class="login-header">
-          <a href="/" class="logo-link">
-            <div class="logo-wrapper">
-              <img
-                src="../../assets/icon.svg"
-                alt="Logo"
-                class="logo-img"
-              />
-            </div>
-          </a>
-          <h1 class="login-title">Selamat Datang Kembali</h1>
-          <p class="login-subtitle">
-            Masuk ke akun Anda untuk melanjutkan
-          </p>
-        </div>
-
-        <!-- Form -->
-        <form @submit.prevent="submit" class="login-form" id="login-form">
-          <!-- Error global -->
-          <div v-if="form.errors.email" class="error-banner" id="login-error-banner">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+      <div class="w-full max-w-md mx-auto my-auto space-y-7">
+        <form @submit.prevent="submit" class="space-y-5">
+          
+          <div v-if="form.errors.email" class="flex items-center gap-2 bg-destructive/10 border border-destructive/20 rounded-[10px] p-3 text-destructive text-[0.85rem] animate-shake">
             <span>{{ form.errors.email }}</span>
           </div>
 
-          <!-- Email Field -->
-          <div class="form-group">
-            <label for="login-email" class="form-label">Email</label>
-            <div class="input-wrapper" :class="{ 'input-error': form.errors.email }">
-              <span class="input-icon">
-                <Mail :size="17" />
+          <div class="space-y-2">
+            <label for="login-email" class="text-[0.85rem] font-medium text-foreground/80">Email</label>
+            <div class="relative flex items-center bg-secondary/30 border border-border rounded-[10px] transition-all duration-200 focus-within:border-primary focus-within:bg-secondary/50 focus-within:ring-2 focus-within:ring-primary/20" :class="{ 'border-destructive/50': form.errors.email }">
+              <span class="flex items-center justify-center pl-3.5 text-muted-foreground/50 shrink-0">
+                <Mail :size="16" />
               </span>
               <input
                 id="login-email"
@@ -73,20 +50,17 @@ function submit() {
                 type="email"
                 autocomplete="email"
                 placeholder="nama@email.com"
-                class="form-input"
+                class="flex-1 bg-transparent border-none outline-none py-3 px-3 text-[0.9rem] text-foreground placeholder-muted-foreground/30"
                 required
               />
             </div>
           </div>
 
-          <!-- Password Field -->
-          <div class="form-group">
-            <div class="label-row">
-              <label for="login-password" class="form-label">Password</label>
-            </div>
-            <div class="input-wrapper" :class="{ 'input-error': form.errors.password }">
-              <span class="input-icon">
-                <Lock :size="17" />
+          <div class="space-y-2">
+            <label for="login-password" class="text-[0.85rem] font-medium text-foreground/80">Password</label>
+            <div class="relative flex items-center bg-secondary/30 border border-border rounded-[10px] transition-all duration-200 focus-within:border-primary focus-within:bg-secondary/50 focus-within:ring-2 focus-within:ring-primary/20" :class="{ 'border-destructive/50': form.errors.password }">
+              <span class="flex items-center justify-center pl-3.5 text-muted-foreground/50 shrink-0">
+                <Lock :size="16" />
               </span>
               <input
                 id="login-password"
@@ -94,475 +68,128 @@ function submit() {
                 :type="showPassword ? 'text' : 'password'"
                 autocomplete="current-password"
                 placeholder="Masukkan password"
-                class="form-input"
+                class="flex-1 bg-transparent border-none outline-none py-3 px-3 text-[0.9rem] text-foreground placeholder-muted-foreground/30"
                 required
               />
               <button
                 type="button"
-                class="password-toggle"
+                class="bg-none border-none cursor-pointer text-muted-foreground/50 px-3.5 flex items-center shrink-0 hover:text-foreground/70 transition-colors"
                 @click="showPassword = !showPassword"
-                :aria-label="showPassword ? 'Sembunyikan password' : 'Tampilkan password'"
               >
-                <EyeOff v-if="showPassword" :size="17" />
-                <Eye v-else :size="17" />
+                <EyeOff v-if="showPassword" :size="16" />
+                <Eye v-else :size="16" />
               </button>
             </div>
           </div>
 
-          <!-- Remember me -->
-          <div class="remember-row">
-            <label class="remember-label" id="remember-me-label">
-              <input
-                id="login-remember"
-                v-model="form.remember"
-                type="checkbox"
-                class="remember-checkbox"
-              />
-              <span class="checkmark"></span>
-              <span class="remember-text">Ingat saya</span>
-            </label>
+          <div class="space-y-3 pt-2">
+            <button
+              type="submit"
+              class="flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 active:scale-[0.99] text-primary-foreground font-semibold text-[0.95rem] border-none rounded-[8px] cursor-pointer transition-all disabled:opacity-60 disabled:cursor-not-allowed shadow-md"
+              :disabled="isLoading"
+            >
+              <Loader2 v-if="isLoading" :size="16" class="animate-spin" />
+              <span>{{ isLoading ? "Signing in..." : "Sign in" }}</span>
+            </button>
           </div>
-
-          <!-- Submit Button -->
-          <button
-            id="login-submit-btn"
-            type="submit"
-            class="submit-btn"
-            :disabled="isLoading"
-          >
-            <Loader2 v-if="isLoading" :size="18" class="spin-icon" />
-            <span>{{ isLoading ? "Memproses..." : "Masuk" }}</span>
-          </button>
         </form>
 
-        <!-- Footer -->
-        <div class="login-footer">
-          <a href="/" class="back-link">← Kembali ke Beranda</a>
-        </div>
+      </div>
+
+      <div class="text-[0.85rem] text-muted-foreground/40 text-center lg:text-left invisible">
+        Spacer
       </div>
     </div>
-  </div>
+
+    <div class="hidden lg:flex lg:w-[55%] relative flex-col justify-between items-stretch p-16 bg-gradient-to-b from-primary/95 to-background border-l border-border isolation-auto">
+      
+      <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        <div class="absolute inset-0 ps2-grid-matrix opacity-[0.25] dark:opacity-[0.12]" />
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[160%] h-[60%] bg-[radial-gradient(ellipse_at_bottom,rgba(var(--accent-rgb,var(--primary)),0.4)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_bottom,rgba(var(--primary),0.2)_0%,transparent_70%)]" />
+        <div class="absolute inset-0 opacity-40 dark:opacity-70">
+          <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-accent/30 blur-[100px] animate-ps2-orb-float-slow" />
+          <div class="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-secondary/20 blur-[140px] animate-ps2-orb-float-fast" />
+          <div class="absolute top-1/2 right-1/3 w-80 h-80 rounded-full bg-primary/30 blur-[90px] animate-ps2-orb-float-reverse" />
+        </div>
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+        <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-border/40 to-transparent" />
+      </div>
+
+      <div class="relative z-10 self-end group" data-aos="fade-down" data-aos-duration="1000">
+        <img src="../../assets/icon.svg" alt="App Logo" class="w-30 h-30 object-contain brightness-0 invert" />
+      </div>
+
+      <div class="relative z-10 text-left max-w-2xl mt-auto" data-aos="fade-up" data-aos-duration="1000">
+        <h1 class="text-7xl xl:text-8xl font-black tracking-tight text-foreground leading-[1.1] uppercase drop-shadow-sm">
+          Admin Panel
+        </h1>
+        <p class="text-xl text-muted-foreground/80 mt-4 leading-relaxed font-medium">
+          Sistem manajemen perangkat lunak skala bisnis terintegrasi.
+        </p>
+      </div>
+
+    </div>
+  </section>
 </template>
 
 <style scoped>
-/* =====================
-   WRAPPER & BACKGROUND
-===================== */
-.login-wrapper {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: #020c16;
-  padding: 1.5rem;
+.ps2-grid-matrix {
+  background-image: 
+    linear-gradient(to right, hsl(var(--foreground) / 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--foreground) / 0.15) 1px, transparent 1px);
+  background-size: 1rem 1rem;
+  mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 80%);
 }
 
-/* Animated Orbs */
-.bg-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  animation: float 8s ease-in-out infinite;
+@keyframes ps2-orb-float-slow {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  50% { transform: translate(30px, -40px) scale(1.15); opacity: 0.6; }
+  100% { transform: translate(-10px, 10px) scale(0.95); opacity: 0.3; }
 }
 
-.bg-orb-1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, hsl(202, 70%, 45%) 0%, transparent 70%);
-  top: -15%;
-  left: -10%;
-  animation-delay: 0s;
+@keyframes ps2-orb-float-fast {
+  0% { transform: translate(0, 0) scale(1.05); opacity: 0.4; }
+  50% { transform: translate(-40px, 30px) scale(0.95); opacity: 0.5; }
+  100% { transform: translate(20px, -20px) scale(1.05); opacity: 0.4; }
 }
 
-.bg-orb-2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, hsl(220, 70%, 35%) 0%, transparent 70%);
-  bottom: -15%;
-  right: -10%;
-  animation-delay: -3s;
-}
-
-.bg-orb-3 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, hsl(190, 70%, 40%) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  animation: float3 8s ease-in-out infinite;
-  animation-delay: -6s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
-}
-
-@keyframes float3 {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, calc(-50% - 20px)) scale(1.05); }
-}
-
-/* Grid Overlay */
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-}
-
-/* =====================
-   CONTAINER & CARD
-===================== */
-.login-container {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 440px;
-}
-
-.login-card {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow:
-    0 25px 50px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255,255,255,0.04),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =====================
-   HEADER
-===================== */
-.login-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.logo-link {
-  display: inline-block;
-  text-decoration: none;
-}
-
-.logo-wrapper {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, hsl(202, 70%, 45%) 0%, hsl(220, 70%, 40%) 100%);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 32px hsla(202, 70%, 45%, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo-wrapper:hover {
-  transform: scale(1.05) rotate(-3deg);
-  box-shadow: 0 12px 40px hsla(202, 70%, 45%, 0.55);
-}
-
-.logo-img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-}
-
-.login-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: -0.02em;
-}
-
-.login-subtitle {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0;
-}
-
-/* =====================
-   FORM
-===================== */
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-/* Error Banner */
-.error-banner {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
-  color: #f87171;
-  font-size: 0.85rem;
-  animation: shake 0.4s ease;
+@keyframes ps2-orb-float-reverse {
+  0% { transform: translate(0, 0) scale(0.95); opacity: 0.4; }
+  50% { transform: translate(-20px, -30px) scale(1.1); opacity: 0.3; }
+  100% { transform: translate(30px, 20px) scale(0.95); opacity: 0.4; }
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20%       { transform: translateX(-6px); }
-  40%       { transform: translateX(6px); }
-  60%       { transform: translateX(-4px); }
-  80%       { transform: translateX(4px); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
 }
 
-/* Form Group */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.animate-ps2-orb-float-slow {
+  animation: ps2-orb-float-slow 21s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
-.form-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 0.01em;
+.animate-ps2-orb-float-fast {
+  animation: ps2-orb-float-fast 24s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
-.label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.animate-ps2-orb-float-reverse {
+  animation: ps2-orb-float-reverse 18s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
-/* Input */
-.input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+.animate-shake {
+  animation: shake 0.4s ease;
 }
 
-.input-wrapper:focus-within {
-  border-color: hsl(202, 70%, 50%);
-  box-shadow: 0 0 0 3px hsla(202, 70%, 50%, 0.15);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.input-wrapper.input-error {
-  border-color: rgba(239, 68, 68, 0.5);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.input-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.75rem 0 1rem;
-  color: rgba(255, 255, 255, 0.35);
-  flex-shrink: 0;
-}
-
-.form-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  padding: 0.85rem 0.75rem 0.85rem 0;
-  font-size: 0.9rem;
-  color: #ffffff;
-  font-family: inherit;
-}
-
-.form-input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
-}
-
-.form-input:-webkit-autofill,
-.form-input:-webkit-autofill:hover,
-.form-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #ffffff;
-  -webkit-box-shadow: 0 0 0px 1000px rgba(2, 12, 22, 0.9) inset;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: hsl(var(--foreground));
+  -webkit-box-shadow: 0 0 0px 1000px hsl(var(--background)) inset;
   transition: background-color 5000s ease-in-out 0s;
-}
-
-.password-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: rgba(255, 255, 255, 0.35);
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  transition: color 0.2s;
-  flex-shrink: 0;
-}
-
-.password-toggle:hover {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Remember Me */
-.remember-row {
-  display: flex;
-  align-items: center;
-}
-
-.remember-label {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  cursor: pointer;
-}
-
-.remember-checkbox {
-  display: none;
-}
-
-.checkmark {
-  width: 18px;
-  height: 18px;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.2s;
-  position: relative;
-}
-
-.remember-checkbox:checked + .checkmark {
-  background: hsl(202, 70%, 50%);
-  border-color: hsl(202, 70%, 50%);
-}
-
-.remember-checkbox:checked + .checkmark::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 6px;
-  border-left: 2px solid white;
-  border-bottom: 2px solid white;
-  transform: rotate(-45deg) translate(1px, -1px);
-}
-
-.remember-text {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-/* Submit Button */
-.submit-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 0.9rem 1.5rem;
-  background: linear-gradient(135deg, hsl(202, 70%, 48%) 0%, hsl(220, 70%, 42%) 100%);
-  color: white;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 20px hsla(202, 70%, 48%, 0.4);
-  font-family: inherit;
-  letter-spacing: 0.01em;
-  margin-top: 0.25rem;
-}
-
-.submit-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px hsla(202, 70%, 48%, 0.55);
-  background: linear-gradient(135deg, hsl(202, 70%, 52%) 0%, hsl(220, 70%, 46%) 100%);
-}
-
-.submit-btn:active:not(:disabled) {
-  transform: translateY(0px);
-}
-
-.submit-btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-.spin-icon {
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* =====================
-   FOOTER
-===================== */
-.login-footer {
-  margin-top: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.footer-text {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.4);
-  margin: 0;
-}
-
-.footer-link {
-  color: hsl(202, 70%, 60%);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.footer-link:hover {
-  color: hsl(202, 70%, 70%);
-}
-
-.back-link {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.3);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.back-link:hover {
-  color: rgba(255, 255, 255, 0.6);
 }
 </style>

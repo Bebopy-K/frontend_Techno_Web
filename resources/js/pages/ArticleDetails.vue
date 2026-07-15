@@ -101,7 +101,7 @@ const handleSubmitComment = () => {
       <section class="mt-16 pt-12 border-t border-border/40 text-left">
         <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-8 flex items-center gap-2.5">
           <MessageSquare class="size-5 text-primary" />
-          Diskusi ({{comments.length }})
+          Komentar ({{comments.length }})
         </h3>
 
         <form @submit.prevent="handleSubmitComment" class="space-y-4 mb-10">

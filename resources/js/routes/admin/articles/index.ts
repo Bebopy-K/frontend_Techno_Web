@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\ArticleController::store
 * @see app/Http/Controllers/ArticleController.php:12
@@ -241,6 +241,12 @@ destroyForm.delete = (args: { article: number | { id: number } } | [article: num
 
 destroy.form = destroyForm
 
-const ArticleController = { store, update, destroy }
 
-export default ArticleController
+
+const articles = {
+    store: Object.assign(store, store),
+    update: Object.assign(update, update),
+    destroy: Object.assign(destroy, destroy),
+}
+
+export default articles
