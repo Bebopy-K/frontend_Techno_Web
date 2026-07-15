@@ -2,14 +2,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import {
-  Paintbrush,
+  Coins,
   MessageCircle,
-  TabletSmartphone,
-  BadgeCheck,
-  Goal,
-  PictureInPicture,
-  MousePointerClick,
-  Newspaper,
+  Clock,
+  Boxes,
+  ShieldCheck,
+  Sparkles,
+  Zap,
 } from "lucide-vue-next";
 
 interface FeaturesProps {
@@ -20,62 +19,66 @@ interface FeaturesProps {
 
 const featureList: FeaturesProps[] = [
   {
-    icon: "tabletSmartphone",
-    title: "Mobile Friendly",
+    icon: "coins", 
+    title: "Harga terjangkau",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, consectetur.",
+      "Kami menawarkan projek yang tidak banyak menghabiskan uang Anda dalam pembuatan projek",
   },
   {
-    icon: "badgeCheck",
-    title: "Social Proof",
+    icon: "messageCircle", 
+    title: "Pro konsumer",
     description:
-      "Lorem ipsum dolor sit amet consectetur. Natus consectetur, odio ea accusamus aperiam.",
+      "Kami selalu mendengar ulasan-ulasan Anda jika semisalnya ada kekurangan yang dapat dipertimbangkan",
   },
   {
-    icon: "goal",
-    title: "Targeted Content",
+    icon: "clock", 
+    title: "Pesan kapan saja",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. odio ea accusamus aperiam.",
+      "Kami melayani pelanggan 24/7 untuk mengatasi masalah mereka",
   },
   {
-    icon: "pictureInPicture",
-    title: "Strong Visuals",
+    icon: "boxes", 
+    title: "All in one servis",
     description:
-      "Lorem elit. A odio velit cum aliquam. Natus consectetur dolores, odio ea accusamus aperiam.",
+      "Kami memiliki banyak servis yang dapat menyelesaikan permasalahan Anda",
   },
   {
-    icon: "mousePointerClick",
-    title: "Clear CTA",
+    icon: "shieldCheck", 
+    title: "Tim Developer Terpercaya",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing. odio ea accusamus consectetur.",
+      "Proyek Anda ditangani langsung oleh tim pengembang profesional yang kompeten, transparan, dan berdedikasi penuh pada visi Anda.",
   },
   {
-    icon: "newspaper",
-    title: "Clear Headline",
+    icon: "sparkles", 
+    title: "Detail & Presisi Tinggi",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur.",
+      "Kami mengutamakan kualitas di atas kecepatan instan. Setiap baris kode dan elemen desain kami kerjakan secara teliti demi hasil akhir yang matang dan minim celah.",
   },
+  {
+    icon: "zap",
+    title: "Agil & Bebas Birokrasi",
+    description:
+      "Sebagai startup yang adaptif, kami bekerja tanpa sekat birokrasi yang berbelit. Pengambilan keputusan dan eksekusi perubahan dapat dilakukan dengan jauh lebih cepat.",
+  }
 ];
 
 const iconMap: Record<
   string,
-  | typeof TabletSmartphone
-  | typeof BadgeCheck
-  | typeof Goal
-  | typeof PictureInPicture
-  | typeof Paintbrush
-  | typeof MousePointerClick
+  | typeof Coins
   | typeof MessageCircle
-  | typeof Newspaper
+  | typeof Clock
+  | typeof Boxes
+  | typeof ShieldCheck
+  | typeof Sparkles
+  | typeof Zap
 > = {
-  tabletSmartphone: TabletSmartphone,
-  badgeCheck: BadgeCheck,
-  goal: Goal,
-  pictureInPicture: PictureInPicture,
-  paintbrush: Paintbrush,
-  mousePointerClick: MousePointerClick,
+  coins: Coins,
   messageCircle: MessageCircle,
-  newspaper: Newspaper,
+  clock: Clock,
+  boxes: Boxes,
+  shieldCheck: ShieldCheck,
+  sparkles: Sparkles,
+  zap: Zap,
 };
 </script>
 
@@ -83,10 +86,11 @@ const iconMap: Record<
   <section
     id="features"
     class="container py-24 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6"
+    data-aos="fade-up" data-aos-duration="1000"
   >
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-12 ">
       <div class="space-y-2 text-left">
-        <p class="text-sm font-semibold tracking-wider text-primary uppercase">Features</p>
+        <p class="text-sm font-semibold tracking-wider text-primary uppercase">tawaran</p>
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
           Mengapa pilih kami?
         </h2>

@@ -4,7 +4,7 @@ import Hero from "@/components/Hero.vue";
 import Benefits from "@/components/Benefits.vue";
 import Features from "@/components/Features.vue";
 import Services from "@/components/Services.vue";
-import Products from "@/components/ProductDetail.vue" 
+import Products from "@/components/Product.vue" 
 // import HowItWorks from "@/components/HowItWorks.vue";
 // import Sponsors from "@/components/Sponsors.vue";
 // import Testimonials from "@/components/Testimonials.vue";
@@ -15,13 +15,54 @@ import Contact from "@/components/Contact.vue";
 import Article from "@/components/Article.vue"
 // import FAQ from "@/components/FAQ.vue";
 import Footer from "@/components/Footer.vue";
+interface Product {
+    id: number;
+    title: string;
+    description: string;
+    category: string;
+    image: string;
+    features: string[];
+}
+
+interface Service {
+    id: number;
+    name: string;
+}
+
+interface Article {
+    id: number;
+    title: string;
+    content: string;
+    image: string;
+    created_at: string;
+
+    user: {
+        name: string;
+    };
+
+    service: {
+        name: string;
+    };
+
+    comments: {
+        id: number;
+    }[];
+}
+
+const props = defineProps<{
+    products: Product[];
+    services: Service[];
+    articles: Article[];
+}>();
+
+console.log(props.products);
 </script>
 
 <template>
-  <Navbar />
-  <Products />
-  <Services />
+  <!-- <Navbar /> -->
   <Hero />
+  <Products :products="props.products"/>
+  <Services :services="props.services"/>
   <Features />
   <Benefits />
   <Team />
@@ -29,9 +70,9 @@ import Footer from "@/components/Footer.vue";
   <HowItWorks />
   <Testimonials />
   <Community />
-  <Article />
+  <Article :articles="props.articles"/>
   <Pricing />
   <FAQ />
   <Contact />
-  <Footer />
+  <!-- <Footer /> -->
 </template>
