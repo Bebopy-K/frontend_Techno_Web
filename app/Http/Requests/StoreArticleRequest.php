@@ -2,31 +2,41 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreArticleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        // Saat update, gambar tidak wajib diupload ulang
+        $imageRule = $this->isMethod('POST')
+            ? 'required|image|mimes:jpg,jpeg,png|max:2048'
+            : 'nullable|image|mimes:jpg,jpeg,png|max:2048';
+
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'tags' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'service_id' => 'required|exists:services,id',
+            'image' => $imageRule,
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Judul artikel wajib diisi.',
+            'content.required' => 'Isi artikel wajib diisi.',
+            'service_id.required' => 'Service wajib dipilih.',
+            'service_id.exists' => 'Service yang dipilih tidak valid.',
+            'image.required' => 'Gambar artikel wajib dipilih.',
+            'image.image' => 'File harus berupa gambar.',
+            'image.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
+            'image.max' => 'Ukuran gambar maksimal 2 MB.',
         ];
     }
 }

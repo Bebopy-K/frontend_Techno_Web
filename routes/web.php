@@ -15,20 +15,31 @@ use App\Models\Article;
 //     });
 // });
 
-// Hapus saja nanti ini Hafiz, saya cuman mau lihat tampilannya
-Route::get('/admin', function () {
-    return Inertia::render('admin/adminDashboard', [
-        'articles' => Article::latest()->get(),
-        'products' => Product::latest()->get(),
-    ]); 
-});
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
-    Route::post('/products', [ProductController::class, 'store']);
-    Route::post('/articles', [ArticleController::class, 'store']);
-    Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
+    Route::get('/admin', function () {
+        return Inertia::render('admin/adminDashboard', [
+            'articles' => Article::with('service')
+                ->latest()
+                ->get(),
+            'products' => Product::latest()->get(),
+            'services' => Service::all(),
+        ]);
+    })->name('admin.dashboard');
+
+    // ARTICLE ADMIN
+    Route::post('/admin/articles', [ArticleController::class, 'store'])
+        ->name('admin.articles.store');
+
+    Route::put('/admin/articles/{article}', [ArticleController::class, 'update'])
+        ->name('admin.articles.update');
+
+    Route::delete('/admin/articles/{article}', [ArticleController::class, 'destroy'])
+        ->name('admin.articles.destroy');
+
+    Route::post('/admin/products', [ProductController::class, 'store']);
+    Route::put('/admin/products/{product}', [ProductController::class, 'update']);
+    Route::delete('/admin/products/{product}', [ProductController::class, 'destroy']);
 });
 
 Route::middleware('auth')->group(function () {

@@ -18,6 +18,10 @@ passkeys.definition = {
 * @route '/.well-known/passkey-endpoints'
 */
 passkeys.url = (options?: RouteQueryOptions) => {
+
+
+
+
     return passkeys.definition.url + queryParams(options)
 }
 
@@ -72,6 +76,8 @@ passkeysForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 passkeys.form = passkeysForm
+
+
 
 const wellKnown = {
     passkeys: Object.assign(passkeys, passkeys),
